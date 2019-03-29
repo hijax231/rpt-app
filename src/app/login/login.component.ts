@@ -3,6 +3,7 @@ import { Credentials } from '../classes/cred';
 import { login } from '../services/login.service';
 import { loginAuthRes } from '../classes/login';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SetAuthRoute } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  authRes = new loginAuthRes();
+
   public loginForm: FormGroup;
 
-  constructor(private auth: login) { }
+  constructor(
+    private auth: login,
+    private setRoute: SetAuthRoute,
+  ) { }
 
   ngOnInit() {
+    if(localStorage.getItem('auth')){
+      this.setRoute.alreadyAuth()
+    }
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
@@ -27,11 +34,18 @@ export class LoginComponent implements OnInit {
         username: form.username,
         password: form.password
       }
-      return this.auth.authenticateUser(data).subscribe(res => {
-        this.authRes.success = res.success;
-        this.authRes.status = res.status;
-        this.authRes.token = res.token;
-        console.log(this.authRes)
+      this.auth.authenticateUser(data).subscribe(res => {
+        // let decodedToken = jwt_decode(res.token)
+        // let authRes: loginAuthRes = {
+        //   iat: decodedToken.iat,
+        //   name: decodedToken.name,
+        //   username: decodedToken.username
+        // }
+        if(!res.success){
+
+        } else {
+          this.setRoute.storeToken(res.token)
+        }
       })
     }
   }

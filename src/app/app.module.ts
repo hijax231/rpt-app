@@ -12,6 +12,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatInputModule, MatGridListModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatInputModule, MatGridListModule, MatToolbarModule, MatButtonModule, M
     HomeComponent,
     RegisterComponent,
     MainNavComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,

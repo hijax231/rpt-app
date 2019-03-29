@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterUser } from '../classes/register';
 import { register } from '../services/register.service';
+import { SetAuthRoute } from '../services/auth.service'
 
 @Component({
   selector: 'app-register',
@@ -10,9 +11,12 @@ import { register } from '../services/register.service';
 })
 export class RegisterComponent implements OnInit {
   public regForm: FormGroup;
-  constructor(private reg: register) { }
+  constructor(private reg: register, private auth: SetAuthRoute) { }
 
   ngOnInit() {
+    if(localStorage.getItem('auth')){
+      this.auth.alreadyAuth()
+    }
     this.regForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),

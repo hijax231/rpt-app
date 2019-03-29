@@ -1,5 +1,5 @@
 export class loginAuthRes {
-  success: boolean;
-  status: string;
-  token: string;
+  iat: number;
+  name: string;
+  username: string;
 }
