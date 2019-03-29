@@ -12,6 +12,6 @@ export class register {
   constructor(private httpClient: HttpClient){}
 
   registerNewUser(data: RegisterUser): Observable<any> {
-    return this.httpClient.post('http://localhost:5000/register', data)
+    return this.httpClient.post('http://localhost:5000/api/register', data)
   }
 }

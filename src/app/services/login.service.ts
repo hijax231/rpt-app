@@ -11,7 +11,7 @@ export class login{
   constructor(private httpClient: HttpClient){}
 
   authenticateUser(data: Credentials): Observable<any> {
-    return this.httpClient.post('http://localhost:5000/login', data)
+    return this.httpClient.post('http://localhost:5000/api/login', data)
   }
 
 }
