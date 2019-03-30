@@ -7,9 +7,15 @@
       <!-- <img src='../assets/SPCLOGO.png'> -->
       <span>Menu</span>
     </mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list *ngIf='nonAuth()'>
       <a mat-list-item routerLink="/login">Login</a>
       <a mat-list-item routerLink="/register">Register</a>
+    </mat-nav-list>
+    <mat-nav-list *ngIf='loggedIn()'>
+      <div *ngFor='let nav of navs'>
+        <a mat-list-item routerLink="{{nav.route}}">{{nav.text}}</a>
+      </div>
+      <a mat-list-item (click)="logOut()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

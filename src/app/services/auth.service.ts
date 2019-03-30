@@ -21,8 +21,7 @@ export class SetAuthRoute {
       username: token.username
     }
     console.log(tokenObj)
-    let route = '/user/' + tokenObj.username;
-    this.router.navigate([route])
+    window.location.href = '/user/' + tokenObj.username;
   }
 
   alreadyAuth(): void {
