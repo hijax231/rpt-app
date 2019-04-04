@@ -1,3 +1,68 @@
-<p>
-  land-assessment works!
-</p>
+<mat-grid-list cols='12' rowHeight='100%'>
+	<mat-grid-tile [colspan]='1'></mat-grid-tile>
+	<mat-grid-tile [colspan]='10'>
+		<form  class='land-form' [formGroup]='landAssessment' (ngSubmit)='save(landAssessment.value)' novalidate>
+			<mat-card>
+				<mat-card-header>Add Land</mat-card-header>
+			</mat-card>
+			<mat-card>
+				<mat-card-content>
+					<mat-grid-list cols='10'>
+						<!-- 1 -->
+						<mat-grid-tile [colspan]='4'>
+							<mat-form-field [ngStyle]="{ 'width': '100%' }">
+								<mat-label>Transaction Code</mat-label>
+								<mat-select formControlName='trnsCode' required>
+									<mat-option *ngFor='let trns of trnsLs' [value]='trns.value'>{{ trns.viewVal }}</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</mat-grid-tile>
+						<mat-grid-tile [colspan]='6'></mat-grid-tile>
+						<!-- 2 -->
+						<mat-grid-tile [colspan]='3'>
+							<mat-form-field [ngStyle]="{ 'width': '100%' }">
+								<input matInput type='text' placeholder='ARP No.' formControlName='arpNo' required>
+							</mat-form-field>
+						</mat-grid-tile>
+						<mat-grid-tile [colspan]='7' formGroupName='pin'>
+							<mat-label>PIN:&nbsp;&nbsp;&nbsp;</mat-label>
+							<mat-form-field [ngStyle]="{ 'width': '10%' }" layout-align='center'>
+								<input matInput type='text' formControlName='city'>
+							</mat-form-field>
+							<mat-label>&nbsp;-&nbsp;</mat-label>
+							<mat-form-field [ngStyle]="{ 'width': '10%' }">
+								<input matInput type='text' formControlName='district'>
+							</mat-form-field>
+							<mat-label>&nbsp;-&nbsp;</mat-label>
+							<mat-form-field [ngStyle]="{ 'width': '10%' }">
+								<input matInput type='text' formControlName='barangay'>
+							</mat-form-field>
+							<mat-label>&nbsp;-&nbsp;</mat-label>
+							<mat-form-field [ngStyle]="{ 'width': '10%' }">
+								<input matInput type='text' formControlName='section'>
+							</mat-form-field>
+							<mat-label>&nbsp;-&nbsp;</mat-label>
+							<mat-form-field [ngStyle]="{ 'width': '10%' }">
+								<input matInput type='text' formControlName='parcel'>
+							</mat-form-field>
+							<mat-label>&nbsp;&nbsp;&nbsp;</mat-label>
+							<button mat-raised-button color='primary'>Check PIN Availability</button>
+						</mat-grid-tile>
+						<!-- 3 -->
+						<mat-grid-tile [colspan]='5'>
+							<mat-form-field [ngStyle]="{ 'width': '90%' }">
+								<input matInput type='text' placeholder='OCT / TCT No.' formControlName='OCT_TCT' required>
+							</mat-form-field>
+						</mat-grid-tile>
+						<mat-grid-tile [colspan]='5'>
+							<mat-form-field [ngStyle]="{ 'width': '80%' }">
+								<input matInput type='text' placeholder='Survey No.' formControlName='surveyNo' required>
+							</mat-form-field>
+						</mat-grid-tile>
+					</mat-grid-list>
+				</mat-card-content>
+			</mat-card>
+		</form>
+	</mat-grid-tile>
+	<mat-grid-tile [colspan]='1'></mat-grid-tile>
+</mat-grid-list>
