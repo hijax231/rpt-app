@@ -56,7 +56,28 @@ export class LandAssessmentComponent implements OnInit {
 				parcel: new FormControl('',[Validators.required])
 			}),
 			OCT_TCT: new FormControl('',[Validators.required]),
-			surveyNo: new FormControl('',[Validators.required])
+			surveyNo: new FormControl('',[Validators.required]),
+			lotNo: new FormControl('',[Validators.required]),
+			blockNo: new FormControl('',[Validators.required]),
+			propertyLocation: new FormGroup({
+				streetNo: new FormControl('',[Validators.required]),
+				barangay: new FormControl('',[Validators.required]),
+				subdivision: new FormControl('',[Validators.required]),
+				city: new FormControl('',[Validators.required]),
+				province: new FormControl('',[Validators.required]),
+				north: new FormControl('',[Validators.required]),
+				south: new FormControl('',[Validators.required]),
+				east: new FormControl('',[Validators.required]),
+				west: new FormControl('',[Validators.required])
+			}),
+			ownerDetails: new FormGroup({
+				fName: new FormControl('',[Validators.required]),
+				mName: new FormControl('',[Validators.required]),
+				lName: new FormControl('',[Validators.required]),
+				address: new FormControl('',[Validators.required]),
+				contact: new FormControl('',[Validators.required]),
+				TIN: new FormControl('',[Validators.required]),
+			})
 		})
 	}
 

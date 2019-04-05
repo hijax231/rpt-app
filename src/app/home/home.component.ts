@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,9 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+		if(localStorage.getItem('auth')) {
+			window.location.href = '/user/' + (jwt_decode(localStorage.getItem('auth'))).username
+		}
   }
 
 }
