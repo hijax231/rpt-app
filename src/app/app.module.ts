@@ -11,7 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatSelectModule, MatInputModule, MatGridListModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+import { MatCheckboxModule, MatTableModule, MatSelectModule, MatInputModule, MatGridListModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LandAssessmentComponent } from './land-assessment/land-assessment.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
@@ -44,6 +44,8 @@ import { BuildingAssessmentComponent } from './building-assessment/building-asse
     MatInputModule,
     MatButtonModule,
 		MatSelectModule,
+		MatTableModule,
+		MatCheckboxModule,
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
