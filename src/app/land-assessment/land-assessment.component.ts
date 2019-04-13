@@ -23,8 +23,17 @@ export interface adminOwner {
 	admTIN: string;
 }
 
+export interface stripInfo {
+	stripNum: string;
+	stripArea: string;
+	adjustment: string;
+	adjustedBaseRate: string;
+	stripMarkVal: string;
+}
+
 var ownerLs: landOwner[] = []
 var adminLs: adminOwner[] = []
+var stripInf: stripInfo[] = []
 
 @Component({
   selector: 'app-land-assessment',
@@ -35,9 +44,11 @@ export class LandAssessmentComponent implements OnInit {
 
 	ownersLs = new MatTableDataSource(ownerLs)
 	adminsLs = new MatTableDataSource(adminLs)
+	stripSetInfo = new MatTableDataSource(stripInf)
 
 	ownerHeader: string[] = ['name','address','contact','tin','actions']
 	adminHeader: string[] = ['name','address','contact','tin','actions']
+	stripHeader: string[] = ['stripno','striparea','adjustment','adbaserate','stripmval','actions']
 
 	trnsLs: selectOpt[] = [
 		{ value:'DISCOVERY/NEW DECLARATION', viewVal:'DISCOVERY/NEW DECLARATION (DC)' },
@@ -65,6 +76,8 @@ export class LandAssessmentComponent implements OnInit {
 		{ value: 'C-4', viewVal: 'C-4' }
 	]
 
+	stripNo: selectOpt[]
+
 	public landAssessment: FormGroup;
 
   constructor(private router: Router) { }
@@ -82,7 +95,13 @@ export class LandAssessmentComponent implements OnInit {
 		}
 	}
 
-
+	setStripNumSel(){
+		this.stripNo = []
+		let cnt = +this.landAssessment.controls['stripSet'].controls['stripCount'].value
+		for(let i = 1; i <= cnt; i++){
+			this.stripNo.push({ value: i.toString(), viewVal: i.toString() })
+		}
+	}
 
 	addOwner() {
 		let ownerData = this.landAssessment.get('ownerDetails').value
@@ -112,6 +131,23 @@ export class LandAssessmentComponent implements OnInit {
 		})
 	}
 
+	addStrip(){
+		let stripData = this.landAssessment.get('stripSet').value
+		stripInf.push({
+			stripNum: stripData.stripNo,
+			stripArea:stripData.stripArea,
+			adjustment:stripData.adjustment,
+			adjustedBaseRate:'',
+			stripMarkVal:''
+		})
+		this.stripSetInfo = new MatTableDataSource(stripInf)
+		Object.keys(this.landAssessment.controls['stripSet'].controls).forEach(key => {
+			if(key != 'stripCount'){
+				this.landAssessment.controls['stripSet'].controls[key].reset()
+			}
+		})
+	}
+
 	removeOwnerDetail(evt){
 		_.remove(ownerLs, evt)
 		this.ownersLs = new MatTableDataSource(ownerLs)
@@ -121,6 +157,12 @@ export class LandAssessmentComponent implements OnInit {
 		_.remove(adminLs, evt)
 		this.adminsLs = new MatTableDataSource(adminLs)
 	}
+
+	removeStripDetail(evt) {
+		_.remove(stripInf, evt)
+		this.stripSetInfo = new MatTableDataSource(stripInf)
+	}
+
 
 	initializeForm(){
 		this.landAssessment = new FormGroup({
@@ -175,11 +217,11 @@ export class LandAssessmentComponent implements OnInit {
 				stripping: new FormControl('')
 			}),
 			stripSet: new FormGroup({
-				stripCount: new FormControl(''),
-				stripArea: new FormControl(''),
-				adjustment: new FormControl(''),
-				adjustedBasicRate: new FormControl(''),
-				stripMarketVal: new FormControl('')
+				stripCount: new FormControl({value: '', disabled: true}),
+				remLandArea: new FormControl({value: '', disabled: true}),
+				stripArea: new FormControl({value: '', disabled: true}),
+				adjustment: new FormControl({value: '', disabled: true}),
+				stripNo: new FormControl({value: '', disabled: true})
 			}),
 			otherImprovements: new FormGroup({
 				kind: new FormControl(''),

@@ -359,7 +359,74 @@
 					<mat-card-header>
 						<mat-card-subtitle>Stripping</mat-card-subtitle>
 					</mat-card-header>
-					<mat-card-content>
+					<mat-card-content formGroupName='stripSet'>
+						<table class='width-100'>
+							<tr>
+								<td>
+									<mat-form-field class='width-90'>
+										<input matInput (keyup)='setStripNumSel()' type='text' placeholder='No. of Strips' formControlName='stripCount'>
+									</mat-form-field>
+								</td>
+								<td>
+									<mat-form-field class='width-90'>
+										<input matInput type='text' placeholder='Remaining Land Area' formControlName='remLandArea'>
+									</mat-form-field>
+								</td>
+								<td>
+									<mat-form-field class='width-90'>
+										<input matInput type='text' placeholder='Strip Area' formControlName='stripArea'>
+									</mat-form-field>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<mat-form-field class='width-90'>
+										<input matInput type='text' placeholder='Adjustment' formControlName='adjustment'>
+									</mat-form-field>
+								</td>
+								<td>
+									<mat-form-field class='width-90'>
+										<mat-label>Strip Number</mat-label>
+										<mat-select formControlName='stripNo'>
+											<mat-option *ngFor='let count of stripNo' [value]='count.value'>{{ count.viewVal }}</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</td>
+								<td>
+									<button mat-raised-button type='button' class='width-90' (click)='addStrip()' color='primary'>Add</button>
+								</td>
+							</tr>
+						</table>
+						<table mat-table class='mat-elevation-z8 owner-table' [dataSource]='stripSetInfo'>
+							<ng-container matColumnDef='stripno'>
+								<th mat-header-cell *matHeaderCellDef>Strip Number</th>
+								<td mat-cell *matCellDef='let data'>{{ data.stripNum }}</td>
+							</ng-container>
+							<ng-container matColumnDef='striparea'>
+								<th mat-header-cell *matHeaderCellDef>Strip Area</th>
+								<td mat-cell *matCellDef='let data'>{{ data.stripArea }}</td>
+							</ng-container>
+							<ng-container matColumnDef='adjustment'>
+								<th mat-header-cell *matHeaderCellDef>Adjustment</th>
+								<td mat-cell *matCellDef='let data'>{{ data.adjustment }}</td>
+							</ng-container>
+							<ng-container matColumnDef='adbaserate'>
+								<th mat-header-cell *matHeaderCellDef>Adjusted Basic Rate</th>
+								<td mat-cell *matCellDef='let data'>{{ data.adjustedBaseRate }}</td>
+							</ng-container>
+							<ng-container matColumnDef='stripmval'>
+								<th mat-header-cell *matHeaderCellDef>Strip Market Value</th>
+								<td mat-cell *matCellDef='let data'>{{ data.stripMarkVal }}</td>
+							</ng-container>
+							<ng-container matColumnDef='actions'>
+								<th mat-header-cell *matHeaderCellDef></th>
+								<mat-cell *matCellDef='let row'>
+									<button type='button' (click)='removeStripDetail(row)' mat-icon-button color='warn'><mat-icon>delete_outline</mat-icon></button>
+								</mat-cell>
+							</ng-container>
+							<tr mat-header-row *matHeaderRowDef='stripHeader'></tr>
+							<tr mat-row *matRowDef='let row; columns: stripHeader'></tr>
+						</table>
 					</mat-card-content>
 				</mat-card>
 				<!-- other improvements -->
