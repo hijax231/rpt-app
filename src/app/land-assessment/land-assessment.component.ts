@@ -31,9 +31,26 @@ export interface stripInfo {
 	stripMarkVal: string;
 }
 
+export interface improvementInfo {
+	kind: string;
+	totalNo: string;
+	unitVal: string;
+	baseMarkVal: string;
+}
+
+export interface marketValue {
+	mBaseVal: string;
+	mAdjustFactor: string;
+	mAdjustPercentage: string;
+	mAdjustValue: string;
+	mMarketVal: string;
+}
+
 var ownerLs: landOwner[] = []
 var adminLs: adminOwner[] = []
 var stripInf: stripInfo[] = []
+var imprInf: improvementInfo[] = []
+var mrktVal: marketValue[] = []
 
 @Component({
   selector: 'app-land-assessment',
@@ -45,6 +62,7 @@ export class LandAssessmentComponent implements OnInit {
 	ownersLs = new MatTableDataSource(ownerLs)
 	adminsLs = new MatTableDataSource(adminLs)
 	stripSetInfo = new MatTableDataSource(stripInf)
+	impInf = new MatTableDataSource(imprInf)
 
 	stripToggleVal = false
 
@@ -64,6 +82,7 @@ export class LandAssessmentComponent implements OnInit {
 	ownerHeader: string[] = ['name','address','contact','tin','actions']
 	adminHeader: string[] = ['name','address','contact','tin','actions']
 	stripHeader: string[] = ['stripno','striparea','adjustment','adbaserate','stripmval','actions']
+	impHeader: string[] = ['kind','total','unitval','baseval','actions']
 
 	trnsLs: selectOpt[] = [
 		{ value:'DISCOVERY/NEW DECLARATION', viewVal:'DISCOVERY/NEW DECLARATION (DC)' },
@@ -163,6 +182,20 @@ export class LandAssessmentComponent implements OnInit {
 		})
 	}
 
+	addImp() {
+		let impData = this.landAssessment.get('otherImprovements').value
+		imprInf.push({
+			kind:impData.kind,
+			totalNo:impData.totalNo,
+			unitVal:impData.unitVal,
+			baseMarkVal:impData.basicMarketVal
+		})
+		this.impInf = new MatTableDataSource(imprInf)
+		Object.keys(this.landAssessment.controls['otherImprovements'].controls).forEach(key => {
+			this.landAssessment.controls['otherImprovements'].controls[key].reset()
+		})
+	}
+
 	removeOwnerDetail(evt){
 		_.remove(ownerLs, evt)
 		this.ownersLs = new MatTableDataSource(ownerLs)
@@ -176,6 +209,11 @@ export class LandAssessmentComponent implements OnInit {
 	removeStripDetail(evt) {
 		_.remove(stripInf, evt)
 		this.stripSetInfo = new MatTableDataSource(stripInf)
+	}
+
+	removeImp(evt) {
+		_.remove(imprInf, evt)
+		this.impInf = new MatTableDataSource(imprInf)
 	}
 
 
@@ -242,14 +280,16 @@ export class LandAssessmentComponent implements OnInit {
 				kind: new FormControl(''),
 				totalNo: new FormControl(''),
 				unitVal: new FormControl(''),
-				basicMarketVal: new FormControl('')
+				basicMarketVal: new FormControl(''),
+				othImpSubTotal: new FormControl({value:'', disabled: true})
 			}),
 			marketVal: new FormGroup({
 				baseMarketVal: new FormControl(''),
 				adjustmentFactor: new FormControl(''),
 				adjustmentPercent: new FormControl(''),
 				adjustmentVal: new FormControl(''),
-				marketVal: new FormControl('')
+				marketVal: new FormControl(''),
+				mvSubTotal: new FormControl('')
 			}),
 			propertyAssessment: new FormGroup({
 				actualUse: new FormControl(''),
