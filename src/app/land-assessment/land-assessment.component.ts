@@ -46,6 +46,21 @@ export class LandAssessmentComponent implements OnInit {
 	adminsLs = new MatTableDataSource(adminLs)
 	stripSetInfo = new MatTableDataSource(stripInf)
 
+	stripToggleVal = false
+
+	stripToggle() {
+		this.stripToggleVal = !this.stripToggleVal
+		if(this.stripToggleVal){
+			Object.keys(this.landAssessment.controls['stripSet'].controls).forEach(key => {
+				this.landAssessment.controls['stripSet'].controls[key].enable()
+			})
+		} else {
+			Object.keys(this.landAssessment.controls['stripSet'].controls).forEach(key => {
+				this.landAssessment.controls['stripSet'].controls[key].disable()
+			})
+		}
+	}
+
 	ownerHeader: string[] = ['name','address','contact','tin','actions']
 	adminHeader: string[] = ['name','address','contact','tin','actions']
 	stripHeader: string[] = ['stripno','striparea','adjustment','adbaserate','stripmval','actions']
