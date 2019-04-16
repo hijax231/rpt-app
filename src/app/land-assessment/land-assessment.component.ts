@@ -63,6 +63,7 @@ export class LandAssessmentComponent implements OnInit {
 	adminsLs = new MatTableDataSource(adminLs)
 	stripSetInfo = new MatTableDataSource(stripInf)
 	impInf = new MatTableDataSource(imprInf)
+	marketValue = new MatTableDataSource(mrktVal)
 
 	stripToggleVal = false
 
@@ -83,6 +84,7 @@ export class LandAssessmentComponent implements OnInit {
 	adminHeader: string[] = ['name','address','contact','tin','actions']
 	stripHeader: string[] = ['stripno','striparea','adjustment','adbaserate','stripmval','actions']
 	impHeader: string[] = ['kind','total','unitval','baseval','actions']
+	mValHeader: string[] = ['bmval','adjfactor','adjperc','adjval','markval','actions']
 
 	trnsLs: selectOpt[] = [
 		{ value:'DISCOVERY/NEW DECLARATION', viewVal:'DISCOVERY/NEW DECLARATION (DC)' },
@@ -196,24 +198,44 @@ export class LandAssessmentComponent implements OnInit {
 		})
 	}
 
-	removeOwnerDetail(evt){
+	addMVal() {
+		let mValue = this.landAssessment.get('marketVal').value
+		mrktVal.push({
+			mBaseVal:'',
+			mAdjustFactor:'',
+			mAdjustPercentage:'',
+			mAdjustValue:'',
+			mMarketVal:''
+		})
+		this.marketValue = new MatTableDataSource(mrktVal)
+		Object.keys(this.landAssessment.controls['marketVal'].controls).forEach(key => {
+			this.landAssessment.controls['marketVal'].controls[key].reset()
+		})
+	}
+
+	removeOwnerDetail(evt: any){
 		_.remove(ownerLs, evt)
 		this.ownersLs = new MatTableDataSource(ownerLs)
 	}
 
-	removeAdminDetail(evt) {
+	removeAdminDetail(evt: any) {
 		_.remove(adminLs, evt)
 		this.adminsLs = new MatTableDataSource(adminLs)
 	}
 
-	removeStripDetail(evt) {
+	removeStripDetail(evt: any) {
 		_.remove(stripInf, evt)
 		this.stripSetInfo = new MatTableDataSource(stripInf)
 	}
 
-	removeImp(evt) {
+	removeImp(evt: any) {
 		_.remove(imprInf, evt)
 		this.impInf = new MatTableDataSource(imprInf)
+	}
+
+	removeMVal(evt: any){
+		_.remove(mrktVal, evt)
+		this.marketValue = new MatTableDataSource(mrktVal)
 	}
 
 
@@ -289,7 +311,7 @@ export class LandAssessmentComponent implements OnInit {
 				adjustmentPercent: new FormControl(''),
 				adjustmentVal: new FormControl(''),
 				marketVal: new FormControl(''),
-				mvSubTotal: new FormControl('')
+				mvSubTotal: new FormControl({value:'', disabled: true})
 			}),
 			propertyAssessment: new FormGroup({
 				actualUse: new FormControl(''),
