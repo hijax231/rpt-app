@@ -12,5 +12,10 @@ $sys-theme: mat-light-theme($def-theme-primary, $def-theme-accent, $def-theme-wa
 
 @include angular-material-theme($sys-theme);
 
+@font-face {
+	font-family: 'CenturyGothic';
+	src: url('./assets/font/CenturyGothic.ttf');
+}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;  font-family: 'CenturyGothic' !important;}

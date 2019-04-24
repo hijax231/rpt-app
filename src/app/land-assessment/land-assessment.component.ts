@@ -112,6 +112,13 @@ export class LandAssessmentComponent implements OnInit {
 		{ value: 'C-4', viewVal: 'C-4' }
 	]
 
+	actualUse: selectOpt[] = [
+		{ value: 'COMMERCIAL', viewVal:'COMMERCIAL' },
+		{ value: 'INDUSTRIAL', viewVal:'INDUSTRIAL' },
+		{ value: 'RESIDENTIAL', viewVal:'RESIDENTIAL' },
+		{ value: 'AGRICULTURAL', viewVal:'AGRICULTURAL' }
+	]
+
 	stripNo: selectOpt[]
 
 	public landAssessment: FormGroup;

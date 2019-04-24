@@ -591,7 +591,14 @@
 						<table class='width-100'>
 							<tr>
 								<td>
-
+									<mat-form-field class='width-80'>
+										<mat-label>Actual Use</mat-label>
+										<mat-select formControlName='actualUse'>
+											<mat-option *ngFor='let sel of actualUse' [value]='sel.value'>{{ sel.viewVal }}</mat-option>
+										</mat-select>
+									</mat-form-field>
+									<br>
+									<mat-checkbox formControlname='specialClass'>Special Class</mat-checkbox>
 								</td>
 							</tr>
 						</table>
