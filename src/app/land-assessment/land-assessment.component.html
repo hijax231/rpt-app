@@ -588,20 +588,120 @@
 						<mat-card-subtitle>Property Assessment</mat-card-subtitle>
 					</mat-card-header>
 					<mat-card-content formGroupName='propertyAssessment'>
+            <!-- <table class='width-100'>
+              <tr>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <mat-label>Actual Use</mat-label>
+                    <mat-select formControlName='actualUse'>
+                      <mat-option *ngFor='let sel of actualUse' [value]='sel.value'>{{ sel.viewVal }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-checkbox formControlname='specialClass' class='width-80'>Special Class</mat-checkbox>
+                </td>
+              </tr>
+            </table>
 						<table class='width-100'>
 							<tr>
-								<td>
-									<mat-form-field class='width-80'>
-										<mat-label>Actual Use</mat-label>
-										<mat-select formControlName='actualUse'>
-											<mat-option *ngFor='let sel of actualUse' [value]='sel.value'>{{ sel.viewVal }}</mat-option>
-										</mat-select>
-									</mat-form-field>
-									<br>
-									<mat-checkbox formControlname='specialClass'>Special Class</mat-checkbox>
-								</td>
-							</tr>
-						</table>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='marketVal' placeholder='Market Value'>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='assessmentLvl' placeholder='Assessment Level %'>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='assessedVal' placeholder='Assessed Value'>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName='status' class='width-80'>
+                      <mat-option *ngFor='let sel of status' value='sel.value'>{{ sel.viewVal }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <mat-label>Quarter</mat-label>
+                    <mat-select formControlName='efftQ'>
+                      <mat-option *ngFor='let sel of quarter' value='sel.value'>{{ sel.viewVal }}</mat-option><
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput placeholder='Year' formControlName='effty'>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='total' placeholder='Total'>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='appraisedName' placeholder='Appraised By'>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='recommendName' placeholder='Recommending'>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='approvedName' placeholder='Approved By'>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput [matDatepicker]='apprdp' formControlName='appraisedDate' placeholder='Date'>
+                    <mat-datepicker-toggle matSuffix [for]='apprdp'></mat-datepicker-toggle>
+                    <mat-datepicker #apprdp></mat-datepicker>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput [matDatepicker]='recdp' formControlName='recommendDate' placeholder='Date'>
+                    <mat-datepicker-toggle matSuffix [for]='recdp'></mat-datepicker-toggle>
+                    <mat-datepicker #recdp></mat-datepicker>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field class='width-80'>
+                    <input matInput [matDatepicker]='aprdp' formControlName='approvedDate' placeholder='Date'>
+                    <mat-datepicker-toggle matSuffix [for]='aprdp'></mat-datepicker-toggle>
+                    <mat-datepicker #aprdp></mat-datepicker>
+                  </mat-form-field>
+                </td>
+              </tr> -->
+              <!-- <tr>
+                <td>
+                  <mat-form-field class='width-100'>
+                    <textarea matInput formControlName='memoranda' placeholder='Memoranda'></textarea>
+                  </mat-form-field>
+                </td>
+              </tr> -->
+            <!-- </table> -->
+
 					</mat-card-content>
 				</mat-card>
 				<!-- superseded record -->

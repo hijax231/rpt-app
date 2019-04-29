@@ -1,8 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 // @import '@angular/material/prebuilt-themes/indigo-pink.css';
-
+@font-face {
+	font-family: 'CenturyGothic';
+	src: url('./assets/font/CenturyGothic.ttf');
+}
 @import '~@angular/material/theming';
-@include mat-core();
+
+$custom-typography: mat-typography-config($font-family: 'CenturyGothic');
+
+@include mat-core($custom-typography);
 
 $def-theme-primary: mat-palette($mat-blue, A700);
 $def-theme-accent: mat-palette($mat-pink, A200, A100, A400);
@@ -12,10 +18,7 @@ $sys-theme: mat-light-theme($def-theme-primary, $def-theme-accent, $def-theme-wa
 
 @include angular-material-theme($sys-theme);
 
-@font-face {
-	font-family: 'CenturyGothic';
-	src: url('./assets/font/CenturyGothic.ttf');
-}
+
 
 html, body { height: 100%; }
 body { margin: 0;  font-family: 'CenturyGothic' !important;}
