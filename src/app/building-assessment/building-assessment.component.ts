@@ -101,6 +101,137 @@ export class BuildingAssessmentComponent implements OnInit {
 		{ value: 'Option 1', viewVal: 'Option 5'},
 	]
 
+	//Building Floors Options
+		bflr: selectOpt[] = [
+			{ value: 'Option 1', viewVal: 'Option 1'},
+			{ value: 'Option 1', viewVal: 'Option 2'},
+			{ value: 'Option 1', viewVal: 'Option 3'},
+			{ value: 'Option 1', viewVal: 'Option 4'},
+			{ value: 'Option 1', viewVal: 'Option 5'},
+		]
+
+	//Floor Area Options
+	flrA: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//Floor With Same Area Options
+	flrArea1: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	flrArea2: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//flooring -floors w/ same mats
+	flrArea3: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	flrArea4: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	flrArea5: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	flrArea6: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//Materials Options
+	matsOpts: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//structuralDesc Bldg. flrs.
+	bldgflrsOpts: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	bldgflrsOpts2: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+	//walls and partitions bldg. flrs.
+
+	//structuralDesc Mats
+	mats2: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//walls and partition
+	mats3: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//floortypeOpts
+	floortypeOpts: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//buildingFloors4
+	buildingFlrsOpts: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
   public bldgAssessment: FormGroup;
 
   constructor(private router: Router) { }
@@ -127,30 +258,30 @@ export class BuildingAssessmentComponent implements OnInit {
 
 			//ownerDetails
 			ownerDetails: new FormGroup({
-				ownfName: new FormControl(''),
+				ownfName: new FormControl('', [Validators.required]),
 				ownmName: new FormControl(''),
-				ownlName: new FormControl(''),
-				ownaddress: new FormControl(''),
+				ownlName: new FormControl('', [Validators.required]),
+				ownaddress: new FormControl('', [Validators.required]),
 				owncontact: new FormControl(''),
 				ownTIN: new FormControl(''),
 			}),
 
 			//admin
 			adminOwnerLs: new FormGroup({
-				admfName: new FormControl(''),
+				admfName: new FormControl('', [Validators.required]),
 				admmName: new FormControl(''),
-				admlName: new FormControl(''),
-				admaddress: new FormControl(''),
+				admlName: new FormControl('', [Validators.required]),
+				admaddress: new FormControl('', [Validators.required]),
 				admcontact: new FormControl(''),
 				admTIN: new FormControl(''),
 			}),
 
 			//buildingLocation
-			numSt: new FormControl('', [Validators.required]),
-			bldgLoc: new FormControl('', [Validators.required]),
-			prov: new FormControl('', [Validators.required]),
-			brgy: new FormControl('', [Validators.required]),
-			subd: new FormControl('', [Validators.required]),
+			numSt: new FormControl(''),
+			bldgLoc: new FormControl(''),
+			prov: new FormControl(''),
+			brgy: new FormControl(''),
+			subd: new FormControl(''),
 
 			//landReference
 			landRef: new FormGroup({
@@ -163,24 +294,59 @@ export class BuildingAssessmentComponent implements OnInit {
 				lndarea: new FormControl(''),
 			}),
 
+			//generalDescription
 			genDescG: new FormGroup({
 				genDesc: new FormControl('', [Validators.required]),
 				certcom: new FormControl('', [Validators.required]),
 				certOcc: new FormControl('', [Validators.required]),
 				strType: new FormControl('', [Validators.required]),
-				bldgPNo: new FormControl('', [Validators.required]),
+				bldgPNo: new FormControl(''),
 				dateCC: new FormControl('', [Validators.required]),
 				permitIssue: new FormControl('', [Validators.required]),
 				dateOccupied: new FormControl('', [Validators.required]),
-				cct: new FormControl('', [Validators.required]),
+				cct: new FormControl(''),
 				aob: new FormControl('', [Validators.required]),
 			}),
 
+			//structuralDescription
 			strDescG: new FormGroup({
 				numStorey: new FormControl('', [Validators.required]),
-				bldgflrs: new FormControl('', [Validators.required]),
-				flrArea: new FormControl('', [Validators.required]),
-			}),
+				bldgflrs: new FormControl(''),
+				flrArea: new FormControl(''),
+				chckBoxFlrA: new FormControl(''),
+				flr1: new FormControl(''),
+				flr2: new FormControl(''),
+				flr3: new FormControl(''),
+				flr4: new FormControl(''),
+				flr5: new FormControl(''),
+				flr6: new FormControl(''),
+				mats: new FormControl(''),
+				othrs: new FormControl(''),
+				othrs2: new FormControl(''),
+				othrs3: new FormControl(''),
+				othrsCB: new FormControl(''),
+				othrsCB2: new FormControl(''),
+				othrsCB3: new FormControl(''),
+				bldgflrs2: new FormControl(''),
+				bldgflrs3: new FormControl(''),
+				mats2: new FormControl(''),
+				mats3: new FormControl(''),
+				flrsameMatsCB:new FormControl(''),
+				flrsameMatsCB2:new FormControl(''),
+				flrsameMatsCB3:new FormControl(''),
+
+				flrheight:new FormControl(''),
+				stndrdheight:new FormControl(''),
+				xcessDefHeight:new FormControl(''),
+
+				basicRatePerMeter:new FormControl(''),
+				basicRateVal:new FormControl(''),
+				aCost: new FormControl(''),
+
+				adjstdBasicRate:new FormControl(''),
+				floortype:new FormControl(''),
+				buildingFlrs: new FormControl(''),
+			}),//structuralDescription END
 		})
   }
 
