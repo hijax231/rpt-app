@@ -16,6 +16,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LandAssessmentComponent } from './land-assessment/land-assessment.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
 import { BuildingAssessmentComponent } from './building-assessment/building-assessment.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -43,14 +44,15 @@ import { BuildingAssessmentComponent } from './building-assessment/building-asse
     MatGridListModule,
     MatInputModule,
     MatButtonModule,
-		MatSelectModule,
-		MatTableModule,
+    MatSelectModule,
+    MatTableModule,
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
   ],
   providers: [
     MatDatepickerModule,
