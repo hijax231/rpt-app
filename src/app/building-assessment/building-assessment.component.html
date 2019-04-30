@@ -27,7 +27,7 @@
 								</td>
 
                 <td formGroupName='pin' class='width-50'>
-									<span>PIN: </span>
+									<span>PIN:* </span>
 									<mat-form-field class='width-10'>
 										<input matInput type='text' formControlName='city' required>
 									</mat-form-field>
@@ -68,7 +68,7 @@
             <tr>
               <td>
                 <mat-form-field class='width-80'>
-                  <input matInput type='text' formControlName='ownfName' placeholder='First name'>
+                  <input matInput type='text' formControlName='ownfName' placeholder='First name' required>
                 </mat-form-field>
               </td>
               <td>
@@ -78,7 +78,7 @@
               </td>
               <td>
                 <mat-form-field class='width-80'>
-                  <input matInput type='text' formControlName='ownlName' placeholder='Last name'>
+                  <input matInput type='text' formControlName='ownlName' placeholder='Last name' required>
                 </mat-form-field>
               </td>
             </tr>
@@ -87,7 +87,7 @@
             <tr>
               <td>
                 <mat-form-field class='width-80'>
-                  <input matInput type='text' formControlName='ownaddress' placeholder='Address'>
+                  <input matInput type='text' formControlName='ownaddress' placeholder='Address' required>
                 </mat-form-field>
               </td>
             </tr>
@@ -141,7 +141,7 @@
       </mat-card>
       </mat-card-content>
 
-      <!-- beneficial users -->
+      <!-- admin / beneficial users -->
       <mat-card-content>
       <mat-card>
         <mat-card-header>
@@ -152,7 +152,7 @@
             <tr>
               <td>
                 <mat-form-field class='width-80'>
-                  <input matInput type='text' formControlName='admfName' placeholder='First name'>
+                  <input matInput type='text' formControlName='admfName' placeholder='First name' required>
                 </mat-form-field>
               </td>
               <td>
@@ -162,7 +162,7 @@
               </td>
               <td>
                 <mat-form-field class='width-80'>
-                  <input matInput type='text' formControlName='admlName' placeholder='Last name'>
+                  <input matInput type='text' formControlName='admlName' placeholder='Last name' required>
                 </mat-form-field>
               </td>
             </tr>
@@ -171,7 +171,7 @@
             <tr>
               <td>
                 <mat-form-field class='width-80'>
-                  <input matInput type='text' formControlName='admaddress' placeholder='Address'>
+                  <input matInput type='text' formControlName='admaddress' placeholder='Address' required>
                 </mat-form-field>
               </td>
             </tr>
@@ -424,24 +424,273 @@
         <!--StructuralDesctription-->
         <mat-card-content>
           <mat-card>
+            <mat-card-header>
+              <mat-card-subtitle>Structural Description</mat-card-subtitle>
+            </mat-card-header>
             <mat-card-content formGroupName='strDescG'>
               <table class='width-100'>
                 <tr>
-                  <td>
-                    <mat-card-header>
-                      <mat-card-subtitle>Structural Description</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-form-field class='width-50'>
+                  <td class='width-50'>
+                    <mat-form-field class='width-80'>
                       <input matInput type='text' formControlName='numStorey' placeholder='No. of Storey:' required>
                     </mat-form-field>
                   </td>
-                  <td>
-                    <mat-card-header>
-                      <mat-card-subtitle>Area</mat-card-subtitle>
-                    </mat-card-header>
+                  <td class="width-50">
+                    <mat-card><!-- AREA -->
+                      Area
+                      <div class="width-100">
+                        <div class="width-100">
+                        <mat-form-field class='width-40'>
+                        <mat-label>Building Floors:</mat-label>
+      									<mat-select formControlName='bldgflrs'>
+      										<mat-option *ngFor='let bldgFloors of bflr' [value]='bldgFloors.value'>{{ bldgFloors.viewVal }}</mat-option>
+      									</mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class='width-40' style='float:right;'>
+                        <mat-label>Floor Area (m²):</mat-label>
+      									<mat-select formControlName='flrArea'>
+      										<mat-option *ngFor='let floorArea of flrA' [value]='floorArea.value'>{{ floorArea.viewVal }}</mat-option>
+      									</mat-select>
+                        </mat-form-field>
+                        </div>
+
+                        <mat-checkbox formControlName='chckBoxFlrA'>Floor with same Area</mat-checkbox>
+
+                        <div class="width-100">
+                          <mat-form-field class='width-40'>
+                          <mat-label>From</mat-label>
+        									<mat-select formControlName='flr1'>
+        										<mat-option *ngFor='let floorAreaFrom of flrArea1' [value]='floorAreaFrom.value'>{{ floorAreaFrom.viewVal }}</mat-option>
+        									</mat-select>
+                          </mat-form-field>
+
+                          <mat-form-field class='width-40' style='float:right;'>
+                          <mat-label>To</mat-label>
+        									<mat-select formControlName='flr2'>
+        										<mat-option *ngFor='let floorAreaTo of flrArea2' [value]='floorAreaTo.value'>{{ floorAreaTo.viewVal }}</mat-option>
+        									</mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="width-100">
+                          <button mat-raised-button type='button' class='width-40' color='primary' style='float:right;'>Apply</button>
+                          <br><br>
+                        </div>
+                      </div>
+
+                    </mat-card>
                   </td>
                 </tr>
               </table>
+
+              <!-- Roof-Flooring-wallsAndPartitions -->
+              <br>
+              <mat-card>
+              <table class='width-100'>
+                <tr>
+                  <td class="width-30">Roof</td>
+                  <td class="width-30">Flooring</td>
+                  <td class="width-30">Walls and Partitions</td>
+                </tr>
+                <tr>
+                  <td><!-- roof -->
+                    <mat-form-field class='width-80'>
+                    <mat-label>Materials:</mat-label>
+                    <mat-select formControlName='mats'>
+                      <mat-option *ngFor='let matsOptions of matsOpts' [value]='matsOptions.value'>{{ matsOptions.viewVal }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                    <mat-checkbox formControlName='othrsCB'>Others (Specify)</mat-checkbox>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='mats'>
+                    </mat-form-field>
+                  </td>
+
+                  <td><!-- Flooring -->
+                    <mat-form-field class='width-80'>
+                    <mat-label>Building Floors:</mat-label>
+                    <mat-select formControlName='bldgflrs2'>
+                      <mat-option *ngFor='let bflrs2 of bldgflrsOpts' [value]='bflrs2.value'>{{ bflrs2.viewVal }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class='width-80'>
+                    <mat-label>Material:</mat-label>
+                    <mat-select formControlName='mats2'>
+                      <mat-option *ngFor='let mtrl of mats2' [value]='mtrl.value'>{{ mtrl.viewVal }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+
+                    <mat-checkbox formControlName='othrsCB2'>Others (Specify)</mat-checkbox>
+
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='othrs2'>
+                    </mat-form-field>
+
+                    <mat-checkbox formControlName='flrsameMatsCB'>Floor w/ same Materials</mat-checkbox>
+
+                    <div class="width-80">
+                      <mat-form-field class='width-40'>
+                      <mat-label>From</mat-label>
+                      <mat-select formControlName='flr3'>
+                        <mat-option *ngFor='let floorAreaFrom3 of flrArea3' [value]='floorAreaFrom3.value'>{{ floorAreaFrom3.viewVal }}</mat-option>
+                      </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field class='width-40' style='float:right;'>
+                      <mat-label>To</mat-label>
+                      <mat-select formControlName='flr4'>
+                        <mat-option *ngFor='let floorAreaFrom4 of flrArea4' [value]='floorAreaFrom4.value'>{{ floorAreaFrom4.viewVal }}</mat-option>
+                      </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="width-80">
+                    <button mat-raised-button type='button' class='width-40' color='primary' style="float:right;">Apply</button>
+                    </div>
+
+                  </td>
+
+                  <td><!--wallsAndPartitions-->
+
+                    <mat-form-field class='width-80'>
+                    <mat-label>Building Floors:</mat-label>
+                    <mat-select formControlName='bldgflrs3'>
+                      <mat-option *ngFor='let bflrs3 of bldgflrsOpts2' [value]='bflrs3.value'>{{ bflrs3.viewVal }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class='width-80'>
+                    <mat-label>Material:</mat-label>
+                    <mat-select formControlName='mats3'>
+                      <mat-option *ngFor='let mtrls2 of mats3' [value]='mtrls2.value'>{{ mtrls2.viewVal }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+
+                    <mat-checkbox formControlName='othrsCB3'>Others (Specify)</mat-checkbox>
+
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='othrs3'>
+                    </mat-form-field>
+
+                    <mat-checkbox formControlName='flrsameMatsCB2'>Floor w/ same Materials</mat-checkbox>
+
+                    <div class="width-80">
+                      <mat-form-field class='width-40'>
+                      <mat-label>From</mat-label>
+                      <mat-select formControlName='flr5'>
+                        <mat-option *ngFor='let floorAreaFrom5 of flrArea5' [value]='floorAreaFrom5.value'>{{ floorAreaFrom5.viewVal }}</mat-option>
+                      </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field class='width-40' style='float:right;'>
+                      <mat-label>To</mat-label>
+                      <mat-select formControlName='flr6'>
+                        <mat-option *ngFor='let floorAreaFrom6 of flrArea6' [value]='floorAreaFrom6.value'>{{ floorAreaFrom6.viewVal }}</mat-option>
+                      </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="width-80">
+                    <button mat-raised-button type='button' class='width-40' color='primary' style="float:right;">Apply</button>
+                    </div>
+
+                  </td>
+                </tr>
+              </table>
+              </mat-card>
+              <!-- -->
+
+              <!-- FLOOR HEIGHT - BASIC RATE PER METER - ADJUSTED BASIC RATE - BUILDING FLOORS -->
+              <br>
+              <table class="width-100">
+                <tr>
+                  <td class='width-30'>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='flrheight' placeholder="Floor Height">
+                    </mat-form-field>
+                  </td>
+                  <td class='width-30'>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='basicRatePerMeter' placeholder="Basic Rate Per Meter(%)">
+                    </mat-form-field>
+                  </td>
+                  <td class='width-30'>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='adjstdBasicRate' placeholder="Adjusted Basic Rate">
+                    </mat-form-field>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='stndrdheight' placeholder="Standard Height">
+                    </mat-form-field>
+                  </td>
+                  <td class='width-30'>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='basicRateVal' placeholder="Basic Rate Value">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class='width-80'>
+                    <mat-label>Floor Type</mat-label>
+                    <mat-select formControlName='floortype'>
+                      <mat-option *ngFor='let ftype of floortypeOpts' [value]='ftype.value'>{{ ftype.viewVal }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='xcessDefHeight' placeholder="Excess / Deficient Height">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='aCost' placeholder="Additional Cost">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class='width-80'>
+                    <mat-label>Building Floors:</mat-label>
+                    <mat-select formControlName='buildingFlrs'>
+                      <mat-option *ngFor='let bflrsopts of buildingFlrsOpts' [value]='bflrsopts.value'>{{ bflrsopts.viewVal }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <mat-checkbox formControlName='flrsameMatsCB3'>Floor w/ same Materials</mat-checkbox>
+                  </td>
+                  <td>
+                    <mat-form-field class='width-40'>
+                    <mat-label>From</mat-label>
+                    <mat-select formControlName='flr5'>
+                      <mat-option *ngFor='let floorAreaFrom5 of flrArea5' [value]='floorAreaFrom5.value'>{{ floorAreaFrom5.viewVal }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class='width-40' style='float:right;'>
+                    <mat-label>To</mat-label>
+                    <mat-select formControlName='flr6'>
+                      <mat-option *ngFor='let floorAreaFrom6 of flrArea6' [value]='floorAreaFrom6.value'>{{ floorAreaFrom6.viewVal }}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <div class='width-80'>
+                    <button mat-raised-button type='button' class='width-40' color='primary' style="float:right;">Apply</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              <!-- -->
             </mat-card-content>
           </mat-card>
         </mat-card-content>
