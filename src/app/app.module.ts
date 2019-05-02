@@ -54,6 +54,7 @@ import { ReassessmentsComponent } from './reassessments/reassessments.component'
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
     FlexLayoutModule,
   ],
   providers: [
