@@ -4,19 +4,10 @@ import {MatTableDataSource} from '@angular/material';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 
-//export interface bldgOwner {
-	//ownName: string;
-	//ownAddress: string;
-	//ownContact: string;
-	//ownTIN: string;
-//}
-
 export interface selectOpt {
 	value: string;
 	viewVal: string;
 }
-
-//var ownerLs: bldgOwner[] = []
 
 @Component({
   selector: 'app-building-assessment',
@@ -232,12 +223,89 @@ export class BuildingAssessmentComponent implements OnInit {
 		{ value: 'Option 1', viewVal: 'Option 5'},
 	]
 
+	//additionalItemsOpts
+	aItemOpts: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//subTypeOpts
+	stOpts: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//propertyAppraisal Type of Building Opts
+	toBldg: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//bldgRating Opts
+	bRating: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//propertyAssessment Actual Use Opts
+	actualUseOpts: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//propertyAsmt Status Opts
+	statsOpts: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//Quarter Opts
+	qrtrOpts: selectOpt[] = [
+		{ value: 'Option 1', viewVal: 'Option 1'},
+		{ value: 'Option 1', viewVal: 'Option 2'},
+		{ value: 'Option 1', viewVal: 'Option 3'},
+		{ value: 'Option 1', viewVal: 'Option 4'},
+		{ value: 'Option 1', viewVal: 'Option 5'},
+	]
+
+	//year Opts
+	yrOpts: selectOpt[] = [
+		{ value: '2019', viewVal: '2019'},
+		{ value: '2018', viewVal: '2018'},
+		{ value: '2017', viewVal: '2017'},
+		{ value: '2016', viewVal: '2016'},
+		{ value: '2015', viewVal: '2015'},
+	]
+
   public bldgAssessment: FormGroup;
 
   constructor(private router: Router) { }
 
 	ownerHeader: string[] = ['name','address','contact','tin','actions']
 	adminHeader: string[] = ['name','address','contact','tin','actions']
+
+	//Structural Desc Table
+	strDescHeader: string[] = ['Floor No.', 'Area', 'Flooring Material', 'Wall Material', 'Floor Height', 'Standard Height', 'Adjusted Basic Rate', 'Floor Type']
+	//Additional Item Table
+	aItemHeader: string[] = ['aItm', 'sType', 'sizem2', 'untCost', 'totalC']
 
   ngOnInit() {
     if(!localStorage.getItem('auth')){
@@ -346,7 +414,68 @@ export class BuildingAssessmentComponent implements OnInit {
 				adjstdBasicRate:new FormControl(''),
 				floortype:new FormControl(''),
 				buildingFlrs: new FormControl(''),
+
+				totalArea: new FormControl(''),
+				totalCost: new FormControl(''),
 			}),//structuralDescription END
+
+			//additionalItems
+			additionalItems: new FormGroup({
+				aItem: new FormControl(''),
+				subType: new FormControl(''),
+				szem2: new FormControl('', [Validators.required]),
+				uCost: new FormControl(''),
+				tCost: new FormControl(''),
+				aItemTotal: new FormControl(''),
+			}),
+
+			//propertyAppraisal
+			propertyAppraisal: new FormGroup({
+				unPainted: new FormControl(''),
+				scndhndMat: new FormControl(''),
+				tob: new FormControl('', [Validators.required]),
+				bldgRating: new FormControl('', [Validators.required]),
+				untConstCost: new FormControl(''),
+				subTotal: new FormControl(''),
+				CoAiSubTotal: new FormControl(''),
+				totalConstCost: new FormControl(''),
+				depRate: new FormControl(''),
+				totalDep: new FormControl(''),
+				depCost: new FormControl(''),
+				marketVal: new FormControl(''),
+			}),
+
+			//propertyAssessment
+			propertyAssessment: new FormGroup({
+				actualUse: new FormControl('', [Validators.required]),
+				propAsmtMarketVal: new FormControl(''),
+				AsmtLevel: new FormControl(''),
+				AsmtVal: new FormControl(''),
+				spclClass: new FormControl(''),
+				status: new FormControl('', [Validators.required]),
+				qrtr: new FormControl('', [Validators.required]),
+				yr: new FormControl('', [Validators.required]),
+				propAsmtTotal: new FormControl(''),
+				appraisedBy: new FormControl(''),
+				appraisedByDate: new FormControl(''),
+				recommending: new FormControl(''),
+				recommendingDate: new FormControl(''),
+				approvedBy: new FormControl(''),
+				approvedByDate: new FormControl(''),
+				txtArea: new FormControl('', [Validators.required]),
+			}),
+
+			//Record of Superseded Assessment
+			rsa:new FormGroup({
+				rsaPin:new FormControl(''),
+				rsaArp:new FormControl(''),
+				rsaTD:new FormControl(''),
+				totalAssessVal:new FormControl(''),
+				prevOwner:new FormControl(''),
+				effectivityAsmt:new FormControl(''),
+				recper: new FormControl(''),
+				rsaDate: new FormControl(''),
+			}),
 		})
   }
 
