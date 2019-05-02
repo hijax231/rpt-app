@@ -11,11 +11,13 @@ import { RegisterComponent } from './register/register.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatCheckboxModule, MatTableModule, MatSelectModule, MatInputModule, MatGridListModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule, MatDatepickerModule, MatCheckboxModule, MatTableModule, MatSelectModule, MatInputModule, MatGridListModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LandAssessmentComponent } from './land-assessment/land-assessment.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
 import { BuildingAssessmentComponent } from './building-assessment/building-assessment.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReassessmentsComponent } from './reassessments/reassessments.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { BuildingAssessmentComponent } from './building-assessment/building-asse
     LandAssessmentComponent,
     AssessmentsComponent,
     BuildingAssessmentComponent,
+    ReassessmentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,16 +46,20 @@ import { BuildingAssessmentComponent } from './building-assessment/building-asse
     MatGridListModule,
     MatInputModule,
     MatButtonModule,
-		MatSelectModule,
-		MatTableModule,
-		MatCheckboxModule,
+    MatSelectModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    FlexLayoutModule,
   ],
-  providers: [],
+  providers: [
+    MatDatepickerModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
