@@ -7,6 +7,7 @@ import LandingPageComponent from './landing-page/landing-page.component';
 import LandAssessmentComponent from './land-assessment/land-assessment.component';
 import BuildingAssessmentComponent from './building-assessment/building-assessment.component';
 import AssessmentsComponent from './assessments/assessments.component';
+import ReassessmentsComponent from './reassessments/reassessments.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'user/:username', component: LandingPageComponent },
   { path: 'user/:username/assessments', component: AssessmentsComponent },
   { path: 'user/:username/assessments/land', component: LandAssessmentComponent },
-  { path: 'user/:username/assessments/building', component: BuildingAssessmentComponent}
+  { path: 'user/:username/assessments/building', component: BuildingAssessmentComponent },
+  { path: 'user/:username/reassessments', component: ReassessmentsComponent }
 ];
 
 @NgModule({
@@ -30,5 +32,6 @@ export const routingComponents = [
   LandingPageComponent,
   LandAssessmentComponent,
   AssessmentsComponent,
-  BuildingAssessmentComponent
+  BuildingAssessmentComponent,
+  ReassessmentsComponent
 ]

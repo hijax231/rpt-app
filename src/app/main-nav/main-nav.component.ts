@@ -26,6 +26,7 @@ export class MainNavComponent {
 
   navs: Nav[] = [
     { route: '/user/' + this.getUser() + '/assessments', text: 'Assessments'},
+    { route: '/user/' + this.getUser() + '/reassessments', text: 'Reassessments' }
   ]
 
   getUser() {

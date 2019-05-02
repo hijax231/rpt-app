@@ -17,6 +17,7 @@ import { LandAssessmentComponent } from './land-assessment/land-assessment.compo
 import { AssessmentsComponent } from './assessments/assessments.component';
 import { BuildingAssessmentComponent } from './building-assessment/building-assessment.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReassessmentsComponent } from './reassessments/reassessments.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LandAssessmentComponent,
     AssessmentsComponent,
     BuildingAssessmentComponent,
+    ReassessmentsComponent,
   ],
   imports: [
     BrowserModule,
