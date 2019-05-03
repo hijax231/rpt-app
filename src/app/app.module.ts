@@ -60,6 +60,7 @@ import { FaasRecComponent } from './faas-rec/faas-rec.component';
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
     FlexLayoutModule,
   ],
   providers: [

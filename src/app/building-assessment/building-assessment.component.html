@@ -104,11 +104,15 @@
                   <input matInput type='text' formControlName='ownTIN' placeholder='TIN No.'>
                 </mat-form-field>
               </td>
-              <td>
-                <button mat-raised-button type='button' class='width-90' color='primary' (click)='addOwner()'>Add</button>
+            </tr>
+            <tr>
+              <td></td>
+              <td align='right'>
+                <button mat-raised-button type='button' class='width-20' color='primary'>Add</button>
+                <button mat-raised-button type='button' class='width-20 ml' color='primary'>Remove</button>
               </td>
             </tr>
-          </table>
+          </table><br>
 
           <table mat-table class='mat-elevation-z8 owner-table' [dataSource]='ownersLs'>
             <ng-container matColumnDef='name'>
@@ -188,11 +192,17 @@
                   <input matInput type='text' formControlName='admTIN' placeholder='TIN No.'>
                 </mat-form-field>
               </td>
-              <td>
-                <button mat-raised-button type='button' class='width-90' color='primary' (click)='addAdmin()'>Add</button>
+            </tr>
+            <tr>
+              <td></td>
+              <td align='right'>
+                <button mat-raised-button type='button' class='width-20' color='primary'>Add</button>
+                <button mat-raised-button type='button' class='width-20 ml' color='primary'>Remove</button>
               </td>
             </tr>
           </table>
+          <br>
+
           <table mat-table class='mat-elevation-z8 owner-table' [dataSource]='adminsLs'>
             <ng-container matColumnDef='name'>
               <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -317,7 +327,7 @@
             </tr>
             <tr>
               <td>
-                <mat-form-field class='width-100'>
+                <mat-form-field class='width-80'>
                   <input matInput type='text' formControlName='lndarea' placeholder='Area'>
                 </mat-form-field>
               </td>
@@ -669,6 +679,7 @@
                   <mat-checkbox formControlName='flrsameMatsCB3'>Floor w/ same Materials</mat-checkbox>
                   </td>
                   <td>
+                    <div class="width-80">
                     <mat-form-field class='width-40'>
                     <mat-label>From</mat-label>
                     <mat-select formControlName='flr5'>
@@ -682,10 +693,69 @@
                       <mat-option *ngFor='let floorAreaFrom6 of flrArea6' [value]='floorAreaFrom6.value'>{{ floorAreaFrom6.viewVal }}</mat-option>
                     </mat-select>
                     </mat-form-field>
+                    </div>
                   </td>
                   <td>
                     <div class='width-80'>
                     <button mat-raised-button type='button' class='width-40' color='primary' style="float:right;">Apply</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Structural Description Table -->
+              <table mat-table class='mat-elevation-z8 owner-table'>
+                <ng-container matColumnDef='Floor No.'>
+                  <th mat-header-cell *matHeaderCellDef>Floor No.</th>
+                  <td mat-cell *matCellDef='let data'></td>
+                </ng-container>
+                <ng-container matColumnDef='Area'>
+                  <th mat-header-cell *matHeaderCellDef>Area</th>
+                  <td mat-cell *matCellDef='let data'></td>
+                </ng-container>
+                <ng-container matColumnDef='Flooring Material'>
+                  <th mat-header-cell *matHeaderCellDef>Flooring Material</th>
+                  <td mat-cell *matCellDef='let data'></td>
+                </ng-container>
+                <ng-container matColumnDef='Wall Material'>
+                  <th mat-header-cell *matHeaderCellDef>Wall Material</th>
+                  <td mat-cell *matCellDef='let data'></td>
+                </ng-container>
+                <ng-container matColumnDef='Floor Height'>
+                  <th mat-header-cell *matHeaderCellDef>Floor Height</th>
+                  <td mat-cell *matCellDef='let data'></td>
+                </ng-container>
+                <ng-container matColumnDef='Standard Height'>
+                  <th mat-header-cell *matHeaderCellDef>Standard Height</th>
+                  <td mat-cell *matCellDef='let data'></td>
+                </ng-container>
+                <ng-container matColumnDef='Adjusted Basic Rate'>
+                  <th mat-header-cell *matHeaderCellDef>Adjusted Basic Rate</th>
+                  <td mat-cell *matCellDef='let data'></td>
+                </ng-container>
+                <ng-container matColumnDef='Floor Type'>
+                  <th mat-header-cell *matHeaderCellDef>Floor Type</th>
+                  <td mat-cell *matCellDef='let data'></td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef='strDescHeader'></tr>
+                <tr mat-row *matRowDef='let row; columns: strDescHeader'></tr>
+              </table>
+
+              <table class='width-100 mt'>
+                <tr>
+                  <td class='width-50'>
+                    <div style='float: right;'>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='totalArea' placeholder="Total Area:">
+                    </mat-form-field>
+                    </div>
+                  </td>
+                  <td class='width-50'>
+                    <div style='float: right;'>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='totalCost' placeholder="Total Cost:">
+                    </mat-form-field>
                     </div>
                   </td>
                 </tr>
@@ -695,6 +765,354 @@
           </mat-card>
         </mat-card-content>
 
+        <!-- Additional Items -->
+        <mat-card-content>
+        <mat-card>
+          <mat-card-header>
+    				<mat-card-subtitle>Additional Items</mat-card-subtitle>
+    			</mat-card-header>
+          <mat-card-content formGroupName='additionalItems'>
+            <table class='width-100'>
+              <tr>
+                <td class="width-50">
+                  <mat-form-field class='width-80'>
+                  <mat-label>Additional Item</mat-label>
+                  <mat-select formControlName='aItem'>
+                    <mat-option *ngFor='let aiOpts of aItemOpts' [value]='aiOpts.value'>{{ aiOpts.viewVal }}</mat-option>
+                  </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80'>
+                  <mat-label>Sub Type</mat-label>
+                  <mat-select formControlName='aItem'>
+                    <mat-option *ngFor='let sbtypOpts of stOpts' [value]='sbtypOpts.value'>{{ sbtypOpts.viewVal }}</mat-option>
+                  </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='szem2' placeholder='Size (m²)' required>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='uCost' placeholder='Unit Cost'>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='tCost' placeholder='Total Cost'>
+                  </mat-form-field>
+
+                  <div class="width-80">
+                      <button mat-raised-button type='button' class='width-20 ml' color='primary' style="float:right;">Remove</button>
+                      <button mat-raised-button type='button' class='width-20' color='primary' style="float:right;">Add</button>
+                  </div>
+                </td>
+
+                <td class="width-50">
+                  <!--Additional Items Table-->
+                  <table mat-table class='mat-elevation-z8 owner-table'>
+                    <ng-container matColumnDef='aItm'>
+                      <th mat-header-cell *matHeaderCellDef>Additional Item</th>
+                      <td mat-cell *matCellDef='let data'></td>
+                    </ng-container>
+                    <ng-container matColumnDef='sType'>
+                      <th mat-header-cell *matHeaderCellDef>Sub Type</th>
+                      <td mat-cell *matCellDef='let data'></td>
+                    </ng-container>
+                    <ng-container matColumnDef='sizem2'>
+                      <th mat-header-cell *matHeaderCellDef>Size (m²)</th>
+                      <td mat-cell *matCellDef='let data'></td>
+                    </ng-container>
+                    <ng-container matColumnDef='untCost'>
+                      <th mat-header-cell *matHeaderCellDef>Unit Cost</th>
+                      <td mat-cell *matCellDef='let data'></td>
+                    </ng-container>
+                    <ng-container matColumnDef='totalC'>
+                      <th mat-header-cell *matHeaderCellDef>Total Cost</th>
+                      <td mat-cell *matCellDef='let data'></td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef='aItemHeader'></tr>
+                    <tr mat-row *matRowDef='let row; columns: aItemHeader'></tr>
+                  </table>
+
+                  <div class="width-100 mt">
+                    <mat-form-field class='width-30' style='float:right;'>
+                      <input matInput type='text' formControlName='aItemTotal' placeholder='Total:'>
+                    </mat-form-field>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+        </mat-card-content>
+
+        <!-- Property Appraisal -->
+        <mat-card-content>
+        <mat-card>
+          <mat-card-header>
+    				<mat-card-subtitle>Property Appraisal</mat-card-subtitle>
+    			</mat-card-header>
+          <mat-card-content formGroupName='propertyAppraisal'>
+            <mat-checkbox formControlName='unPainted'>Unpainted</mat-checkbox>
+            &nbsp;&nbsp;
+            <mat-checkbox formControlName='scndhndMat'>Second Hand Material</mat-checkbox>
+
+            <table class="width-100">
+              <tr>
+                <td class="width-30">
+                  <mat-form-field class='width-80'>
+                  <mat-label>Type of Building:</mat-label>
+                  <mat-select formControlName='tob' required>
+                    <mat-option *ngFor='let typOfBldg of toBldg' [value]='typOfBldg.value'>{{ typOfBldg.viewVal }}</mat-option>
+                  </mat-select>
+                  </mat-form-field>
+                </td>
+                <td class="width-30">
+                  <mat-form-field class='width-80'>
+                  <mat-label>Building Rating:</mat-label>
+                  <mat-select formControlName='bldgRating' required>
+                    <mat-option *ngFor='let bldgRtng of bRating' [value]='bldgRtng.value'>{{ bldgRtng.viewVal }}</mat-option>
+                  </mat-select>
+                  </mat-form-field>
+                </td>
+                <td class="width-30"></td>
+              </tr>
+            </table>
+
+              <table class="width-100">
+                <tr>
+                  <td class="width-30">
+                    Building Core
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='untConstCost' placeholder='Unit Construction Cost:'>
+                    </mat-form-field>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='subTotal' placeholder='Sub - Total:'>
+                    </mat-form-field>
+                  </td>
+                  <td class="width-30">
+                    Cost of Additional Items
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='CoAiSubTotal' placeholder='Sub - Total:'>
+                    </mat-form-field>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='totalConstCost' placeholder='Total Construction Cost:'>
+                    </mat-form-field>
+                  </td>
+                  <td class="width-30">
+                    Depreciation
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='depRate' placeholder='Depreciation Rate:'>
+                    </mat-form-field>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='totalDep' placeholder='Total % Depreciation:'>
+                    </mat-form-field>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='depCost' placeholder='Depreciation Cost:'>
+                    </mat-form-field>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='marketVal' placeholder='Market Value:'>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+          </mat-card-content>
+        </mat-card>
+        </mat-card-content>
+
+        <!--propertyAssessment-->
+        <mat-card-content formGroupName='propertyAssessment'>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-subtitle>Property Assessment</mat-card-subtitle>
+            </mat-card-header>
+            <table class="width-100">
+              <tr>
+                <td class='width-50'>
+                  <mat-form-field class='width-80'>
+                  <mat-label>Actual Use:</mat-label>
+                  <mat-select formControlName='actualUse' required>
+                    <mat-option *ngFor='let auOpts of actualUseOpts' [value]='auOpts.value'>{{ auOpts.viewVal }}</mat-option>
+                  </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='propAsmtMarketVal' placeholder='Market Value:'>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='AsmtLevel' placeholder='Assessment Level (%):'>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='AsmtVal' placeholder='Assessment Value:'>
+                  </mat-form-field>
+                </td>
+
+                <td class="width-50">
+                  <mat-checkbox formControlName='spclClass'>Special Class</mat-checkbox>
+
+                  <mat-form-field class='width-80'>
+                  <mat-label>Status:</mat-label>
+                  <mat-select formControlName='status' required>
+                    <mat-option *ngFor='let statusOpt of statsOpts' [value]='statusOpt.value'>{{ statusOpt.viewVal }}</mat-option>
+                  </mat-select>
+                  </mat-form-field>
+
+                  <br>Effectivity of Assessment / Reassessment*
+                  <div class="width-80">
+                  <mat-form-field class='width-40'>
+                  <mat-label>Quarter:</mat-label>
+                  <mat-select formControlName='qrtr'>
+                    <mat-option *ngFor='let quarterOpts of qrtrOpts' [value]='quarterOpts.value'>{{ quarterOpts.viewVal }}</mat-option>
+                  </mat-select>
+                  </mat-form-field>
+
+                  <!--<mat-form-field clas='width-40px;'>
+                    <input matInput placeholder='Year' [matDatepicker]="year">
+                    <mat-datepicker-toggle matSuffix [for]="year"></mat-datepicker-toggle>
+                    <mat-datepicker #year></mat-datepicker>
+                  </mat-form-field>-->
+
+                  <mat-form-field class='width-40' style="float:right;">
+                  <mat-label>Year:</mat-label>
+                  <mat-select formControlName='yr'>
+                    <mat-option *ngFor='let years of yrOpts' [value]='years.value'>{{ years.viewVal }}</mat-option>
+                  </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-100'>
+                    <input matInput type='text' formControlName='propAsmtTotal' placeholder='Total:'>
+                  </mat-form-field>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <mat-card>
+            <table>
+              <tr>
+                <td class="width-30">
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='appraisedBy' placeholder='Appraised By:'>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80px;'>
+                    <input matInput placeholder='Date:' [matDatepicker]="date" formControlName='appraisedByDate'>
+                    <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                    <mat-datepicker #date></mat-datepicker>
+                  </mat-form-field>
+                </td>
+
+                <td class="width-30">
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='recommending' placeholder='Recommending:'>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80px;'>
+                    <input matInput placeholder='Date:' [matDatepicker]="date1" formControlName='recommendingDate'>
+                    <mat-datepicker-toggle matSuffix [for]="date1"></mat-datepicker-toggle>
+                    <mat-datepicker #date1></mat-datepicker>
+                  </mat-form-field>
+                </td>
+
+                <td class="width-30">
+                  <mat-form-field class='width-80'>
+                    <input matInput type='text' formControlName='approvedBy' placeholder='Approved By:'>
+                  </mat-form-field>
+
+                  <mat-form-field class='width-80px;'>
+                    <input matInput placeholder='Date:' [matDatepicker]="date2" formControlName='approvedByDate'>
+                    <mat-datepicker-toggle matSuffix [for]="date2"></mat-datepicker-toggle>
+                    <mat-datepicker #date2></mat-datepicker>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
+            </mat-card>
+
+            <br>
+            Memoranda*
+            <mat-form-field class="width-100">
+              <textarea matInput formControlName='txtArea' style="resize:none;">
+              </textarea>
+            </mat-form-field>
+
+          </mat-card>
+        </mat-card-content>
+
+        <!-- Record of Superseded Assessment -->
+        <mat-card-content>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-subtitle>Record of Superseded Assessment</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content formGroupName='rsa'>
+              <table class="width-100">
+                <tr>
+                  <td colspan='2'>
+                    <mat-form-field class='width-90'>
+                      <input matInput type='text' formControlName='rsaPin' placeholder='PIN:'>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='rsaArp' placeholder='Arp No.:'>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='rsaTD' placeholder='TD No.:'>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <mat-form-field class='width-90'>
+                      <input matInput type='text' formControlName='totalAssessVal' placeholder='Total Assessed Value:'>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <mat-form-field class='width-90'>
+                      <input matInput type='text' formControlName='prevOwner' placeholder='Previous Owner:'>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <mat-form-field class='width-90'>
+                      <input matInput type='text' formControlName='effectivityAsmt' placeholder='Effectivity of Assessment:'>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <mat-form-field class='width-80'>
+                      <input matInput type='text' formControlName='recper' placeholder='Recording Personnel:'>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field class='width-80px;'>
+                      <input matInput placeholder='Date:' [matDatepicker]="date3" formControlName='rsaDate'>
+                      <mat-datepicker-toggle matSuffix [for]="date3"></mat-datepicker-toggle>
+                      <mat-datepicker #date3></mat-datepicker>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+            </mat-card-content>
+          </mat-card>
+        </mat-card-content>
+          <mat-card-actions align='center'>
+            <button mat-raised-button color='primary' type='submit'>Save</button>
+            <button mat-raised-button color='warn'>Clear</button>
+          </mat-card-actions>
     </mat-card>
 
   </form>
