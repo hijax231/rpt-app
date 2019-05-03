@@ -18,6 +18,9 @@ import { AssessmentsComponent } from './assessments/assessments.component';
 import { BuildingAssessmentComponent } from './building-assessment/building-assessment.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReassessmentsComponent } from './reassessments/reassessments.component';
+import { LandReassessmentComponent } from './land-reassessment/land-reassessment.component';
+import { BuildingReassessmentComponent } from './building-reassessment/building-reassessment.component';
+import { FaasRecComponent } from './faas-rec/faas-rec.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { ReassessmentsComponent } from './reassessments/reassessments.component'
     AssessmentsComponent,
     BuildingAssessmentComponent,
     ReassessmentsComponent,
+    LandReassessmentComponent,
+    BuildingReassessmentComponent,
+    FaasRecComponent,
   ],
   imports: [
     BrowserModule,

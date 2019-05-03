@@ -1,8 +1,8 @@
-<mat-grid-list cols='2' rowHeight='90%'>
-  <mat-grid-tile [colspan]='1' align='center'>
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center'>
+  <div class='item item-1' fxFlex='50%' fxLayoutAlign='center center'>
     <button class='aBtn' mat-raised-button (click)='landAssessment()'>Land Assessment</button>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]='1' align='center'>
+  </div>
+  <div class='item item-2' fxFlex='50%' fxLayoutAlign='center center'>
     <button class='aBtn' mat-raised-button (click)='buildingAssessment()'>Building Assessment</button>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>

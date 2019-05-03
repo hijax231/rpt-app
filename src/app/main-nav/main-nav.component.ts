@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Router } from  '@angular/router'
+import { Router } from '@angular/router'
 import * as jwt_decode from 'jwt-decode'
 
 export interface Nav {
@@ -16,23 +16,25 @@ export interface Nav {
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent {
+  private userFullName: String;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private route: Router) {}
+  constructor(private breakpointObserver: BreakpointObserver, private route: Router) { }
 
   navs: Nav[] = [
-    { route: '/user/' + this.getUser() + '/assessments', text: 'Assessments'},
-    { route: '/user/' + this.getUser() + '/reassessments', text: 'Reassessments' }
+    { route: '/user/' + this.getUser() + '/assessments', text: 'Assessments' },
+    { route: '/user/' + this.getUser() + '/reassessments', text: 'Reassessments' },
+    { route: '/user/' + this.getUser() + '/faas-records', text: 'Faas Records' }
   ]
 
   getUser() {
-    if(localStorage.getItem('auth')){
+    if (localStorage.getItem('auth')) {
       let token = jwt_decode(localStorage.getItem('auth'))
-      console.log(token.username)
+      this.userFullName = token.name
       return token.username
     }
   }
@@ -41,11 +43,11 @@ export class MainNavComponent {
     return localStorage.getItem('auth') == null
   }
 
-  loggedIn(){
+  loggedIn() {
     return localStorage.getItem('auth') != null
   }
 
-  logOut(){
+  logOut() {
     localStorage.removeItem('auth')
     window.location.href = '/'
   }

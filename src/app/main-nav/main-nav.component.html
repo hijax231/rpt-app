@@ -1,11 +1,10 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="!(isHandset$ | async)">
-    <mat-toolbar>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false" (click)="drawer.toggle()"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="side" [opened]="false">
+    <mat-toolbar color="primary">
       <!-- <img src='../assets/SPCLOGO.png'> -->
-      <span>Menu</span>
+      <span *ngIf='nonAuth()'>Menu</span>
+      <span *ngIf='loggedIn()'>{{ userFullName }}</span>
     </mat-toolbar>
     <mat-nav-list *ngIf='nonAuth()'>
       <a mat-list-item routerLink="/login">Login</a>
@@ -20,12 +19,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>RPT Web Application</span>

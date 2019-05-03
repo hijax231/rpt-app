@@ -3,13 +3,13 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 210px;
 }
 
-.sidenav .mat-toolbar {
+/* .sidenav .mat-toolbar {
   background: #ffffff;
   height: auto;
-}
+} */
 
 .mat-toolbar.mat-primary {
   position: sticky;
