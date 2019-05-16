@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -11,7 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatNativeDateModule, MatDatepickerModule, MatCheckboxModule, MatTableModule, MatSelectModule, MatInputModule, MatGridListModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+import { MatRadioModule, MatNativeDateModule, MatDatepickerModule, MatCheckboxModule, MatTableModule, MatSelectModule, MatInputModule, MatGridListModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LandAssessmentComponent } from './land-assessment/land-assessment.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
@@ -62,6 +62,8 @@ import { FaasRecComponent } from './faas-rec/faas-rec.component';
     ReactiveFormsModule,
     MatDatepickerModule,
     FlexLayoutModule,
+    MatRadioModule,
+    FormsModule,
   ],
   providers: [
     MatDatepickerModule,

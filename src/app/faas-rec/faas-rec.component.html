@@ -1,3 +1,24 @@
-<p>
-  faas-rec works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Faas Records</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class='container' fxLayout='column' fxLayout.xs='column' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+      <label>Search record in:</label>
+      <mat-radio-group class='item item-1' fxFlex='40%' [(ngModel)]='param1'>
+        <mat-radio-button *ngFor='let p1 of params1' [value]='p1.value'>{{ p1.viewVal }}</mat-radio-button>
+      </mat-radio-group>
+      <label>Search record by:</label>
+      <mat-radio-group class='item item-2' fxFlex='40%' [(ngModel)]='param2'>
+        <mat-radio-button *ngFor='let p2 of params2' [value]='p2.value'>{{ p2.viewVal }}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <br>
+    <div class='container' fxLayout fxLayout.xs='column' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+      <mat-form-field class='item item-1' fxFlex='40%'>
+        <input matInput type='text' placeholder='Enter input here' [(ngModel)]='req'>
+      </mat-form-field>
+      <button mat-raised-button class='item item-2' fxFlex='15%' color='primary' (click)='search()'>Search</button>
+    </div>
+  </mat-card-content>
+</mat-card>

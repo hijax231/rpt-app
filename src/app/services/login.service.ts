@@ -7,8 +7,8 @@ import { Credentials } from '../classes/cred';
   providedIn: 'root'
 })
 
-export class login{
-  constructor(private httpClient: HttpClient){}
+export class login {
+  constructor(private httpClient: HttpClient) { }
 
   authenticateUser(data: Credentials): Observable<any> {
     return this.httpClient.post('http://192.168.100.24:5000/api/login', data)

@@ -18,15 +18,15 @@ export class ReassessmentsComponent implements OnInit {
   }
 
   landReassessment() {
-    // let token = jwt_decode(localStorage.getItem('auth'))
-    // let route = '/user/' + token.username + '/assessments/land'
-    // this.router.navigate([route])
+    let token = jwt_decode(localStorage.getItem('auth'))
+    let route = '/user/' + token.username + '/reassessments/land'
+    this.router.navigate([route])
   }
 
   buildingReassessment() {
-    // let token = jwt_decode(localStorage.getItem('auth'))
-    // let route = '/user/' + token.username + '/assessments/building'
-    // this.router.navigate([route])
+    let token = jwt_decode(localStorage.getItem('auth'))
+    let route = '/user/' + token.username + '/reassessments/building'
+    this.router.navigate([route])
   }
 
 }
