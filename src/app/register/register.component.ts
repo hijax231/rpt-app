@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterUser } from '../classes/register';
 import { register } from '../services/register.service';
-import { SetAuthRoute } from '../services/auth.service'
+import { SetAuthRoute } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { SetAuthRoute } from '../services/auth.service'
 })
 export class RegisterComponent implements OnInit {
   public regForm: FormGroup;
-  constructor(private reg: register, private auth: SetAuthRoute) { }
+  constructor(private reg: register, private auth: SetAuthRoute, private router: Router) { }
 
   ngOnInit() {
     if(localStorage.getItem('auth')){
@@ -41,7 +42,9 @@ export class RegisterComponent implements OnInit {
         contact: form.contact
       }
       return this.reg.registerNewUser(data).subscribe(res => {
-        console.log(res)
+        if(res.success == true) {
+          this.router.navigate(['/login']);
+        }
       })
     }
   }
