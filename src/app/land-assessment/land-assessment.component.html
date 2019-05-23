@@ -146,7 +146,7 @@
               <input matInput type='text' formControlName='ownTIN' placeholder='TIN No.'>
             </mat-form-field>
             <button mat-raised-button type='button' class='item item-3' fxFlex='30%' color='primary'
-              (click)='addOwner()'>Add</button>
+              (click)="addOwner(landAssessment.get('ownerDetails'))">Add</button>
           </div>
           <br>
           <div class='containerX' fxLayout fxLayout.xs='column' fxLayoutAlign='center'>
@@ -214,7 +214,7 @@
               <input matInput type='text' formControlName='admTIN' placeholder='TIN No.'>
             </mat-form-field>
             <button mat-raised-button type='button' class='item item-3' fxFlex='30%' color='primary'
-              (click)='addAdmin()'>Add</button>
+              (click)="addAdmin(landAssessment.get('adminOwnerLs'))">Add</button>
           </div>
           <br>
           <div class='containerX' fxLayout fxLayout.xs='column' fxLayoutAlign='center'>
@@ -259,34 +259,34 @@
             fxLayoutGap.xs='10px'>
           <mat-form-field class='item item-1' fxFlex='30%'>
             <mat-label>Classification</mat-label>
-            <mat-select formControlName='class' required>
+            <mat-select formControlName='class' (selectionChange)="lndAppChngVal(landAssessment.get('landAppraisal'))" required>
               <mat-option *ngFor='let cls of landClassLs' [value]='cls.value'>{{ cls.viewVal }}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class='item item-2' fxFlex='30%'>
             <mat-label>Sub-Classification</mat-label>
-            <mat-select formControlName='subclass' required>
+            <mat-select formControlName='subclass' (selectionChange)="lnAppSubCUV(landAssessment.get('landAppraisal'))" required>
               <mat-option *ngFor='let subcls of subClassLs' [value]='subcls.value'>{{ subcls.viewVal }}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class='item item-3' fxFlex='30%'>
-            <input matInput type='text' placeholder='Area' formControlName='area'>
+            <input matInput type='text' placeholder='Area' formControlName='area' (keyup)="computeBMV(landAssessment.get('landAppraisal'))">
           </mat-form-field>
           </div>
           <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
             fxLayoutGap.xs='10px'>
             <mat-form-field class='item item-1' fxFlex='30%'>
-              <input matInput type='text' placeholder='Unit Value' formControlName='unitVal'>
+              <input matInput type='text' placeholder='Unit Value' formControlName='unitVal' [value]='lndAppUnitVal'>
             </mat-form-field>
             <mat-form-field class='item item-2' fxFlex='30%'>
-              <input matInput type='text' placeholder='Base Market Value' formControlName='baseMarketVal'>
+              <input matInput type='text' placeholder='Base Market Value' formControlName='baseMarketVal' [value]='lndAppBMV'>
             </mat-form-field>
             <div class='item item-3' fxFlex='30%'>
               <mat-checkbox formControlName='interiorLot'>Interior Lot</mat-checkbox>
               <br>
               <mat-checkbox formControlName='cornerLot'>Corner Lot</mat-checkbox>
               <br>
-              <mat-checkbox (change)='stripToggle()' formControlName='stripping'>Stripping</mat-checkbox>
+              <mat-checkbox (change)="stripToggle(landAssessment.get('stripSet'))" formControlName='stripping'>Stripping</mat-checkbox>
             </div>
           </div>
         </mat-card-content>
@@ -300,7 +300,7 @@
           <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
             fxLayoutGap.xs='10px'>
             <mat-form-field class='item item-1' fxFlex='30%'>
-              <input matInput (keyup)='setStripNumSel()' type='text' placeholder='No. of Strips' formControlName='stripCount'>
+              <input matInput (keyup)="setStripNumSel(landAssessment.get('stripSet'))" type='text' placeholder='No. of Strips' formControlName='stripCount'>
             </mat-form-field>
             <mat-form-field class='item item-2' fxFlex='30%'>
               <input matInput type='text' placeholder='Remaining Land Area' formControlName='remLandArea'>
@@ -320,7 +320,7 @@
                 <mat-option *ngFor='let count of stripNo' [value]='count.value'>{{ count.viewVal }}</mat-option>
               </mat-select>
             </mat-form-field>
-            <button mat-raised-button class='item item-3' fxFlex='30%' [disabled]='!stripToggleVal' type='button' class='item item-3' fxFlex='30%' (click)='addStrip()'
+            <button mat-raised-button class='item item-3' fxFlex='30%' [disabled]='!stripToggleVal' type='button' class='item item-3' fxFlex='30%' (click)="addStrip(landAssessment.get('stripSet'))"
               color='primary'>Add</button>
           </div>
           <br>
@@ -382,7 +382,7 @@
             <mat-form-field class='item item-1' fxFlex='30%'>
               <input matInput type='text' formControlName='basicMarketVal' placeholder='Base Market Value'>
             </mat-form-field>
-            <button mat-raised-button (click)='addImp()' type='button' color='primary' class='item item-2' fxFlex='30%'>Add</button>
+            <button mat-raised-button (click)="addImp(landAssessment.get('otherImprovements'))" type='button' color='primary' class='item item-2' fxFlex='30%'>Add</button>
           </div>
           <br>
           <div class='containerX' fxLayout fxLayout.xs='column' fxLayoutAlign='center'>
@@ -448,7 +448,7 @@
             <mat-form-field class='item item-2' fxFlex='30%'>
               <input matInput type='text' placeholder='Market Value' formControlName='marketVal'>
             </mat-form-field>
-            <button type='button' (click)='addMVal()' mat-raised-button color='primary' class='item item-3' fxFlex='30%'>Add</button>
+            <button type='button' (click)="addMVal(landAssessment.get('marketVal'))" mat-raised-button color='primary' class='item item-3' fxFlex='30%'>Add</button>
           </div>
           <br>
           <div class='containerX' fxLayout fxLayout.xs='column' fxLayoutAlign='center'>

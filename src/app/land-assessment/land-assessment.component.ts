@@ -31,16 +31,16 @@ export class LandAssessmentComponent implements OnInit {
 
   stripToggleVal = false
 
-  stripToggle() {
+  stripToggle(grp: FormGroup) {
     this.stripToggleVal = !this.stripToggleVal
     if (this.stripToggleVal) {
-      Object.keys(this.landAssessment.controls['stripSet'].controls).forEach(key => {
-        this.landAssessment.controls['stripSet'].controls[key].enable()
-      })
+      Object.keys(grp.controls).forEach(key => {
+        grp.controls[key].enable();
+      });
     } else {
-      Object.keys(this.landAssessment.controls['stripSet'].controls).forEach(key => {
-        this.landAssessment.controls['stripSet'].controls[key].disable()
-      })
+      Object.keys(grp.controls).forEach(key => {
+        grp.controls[key].disable();
+      });
     }
   }
 
@@ -62,26 +62,187 @@ export class LandAssessmentComponent implements OnInit {
     { value: 'SPECIAL PROJECT', viewVal: 'SPECIAL PROJECT (SP)' },
   ]
 
-  landClassLs: selectOpt[] = [
-    { value: 'COMMERCIAL', viewVal: 'COMMERCIAL' },
-    { value: 'INDUSTRIAL', viewVal: 'INDUSTRIAL' },
-    { value: 'RESIDENTIAL', viewVal: 'RESIDENTIAL' },
-    { value: 'AGRICULTURAL', viewVal: 'AGRICULTURAL' }
+  landClassLs: any = [
+    { 
+      value: 'COMMERCIAL',
+      viewVal: 'COMMERCIAL',
+      subC: [
+        {
+          value: 'C-1',
+          viewVal: 'C-1',
+          unitVal: '8280.0000'
+        },
+        {
+          value: 'C-2',
+          viewVal: 'C-2',
+          unitVal: '5260.0000'
+        },
+        {
+          value: 'C-3',
+          viewVal: 'C-3',
+          unitVal: '3000.0000'
+        },
+        {
+          value: 'C-4',
+          viewVal: 'C-4',
+          unitVal: '2000.0000'
+        }
+      ]
+    },
+    {
+      value: 'INDUSTRIAL',
+      viewVal: 'INDUSTRIAL',
+      subC: [
+        {
+          value: 'I-1',
+          viewVal: 'I-1',
+          unitVal: '850.0000'
+        },
+        {
+          value: 'I-2',
+          viewVal: 'I-2',
+          unitVal: '600.0000'
+        },
+        {
+          value: 'I-3',
+          viewVal: 'I-3',
+          unitVal: '400.0000'
+        },
+      ]
+    },
+    {
+      value: 'RESIDENTIAL',
+      viewVal: 'RESIDENTIAL',
+      subC: [
+        {
+          value: 'R-1',
+          viewVal: 'R-1',
+          unitVal: '2860.0000'
+        },
+        {
+          value: 'R-2',
+          viewVal: 'R-2',
+          unitVal: '1260.0000'
+        },
+        {
+          value: 'R-3',
+          viewVal: 'R-3',
+          unitVal: '800.0000'
+        },
+        {
+          value: 'R-3 (3-C)',
+          viewVal: 'R-3 (3-C)',
+          unitVal: '800.0000'
+        },
+        {
+          value: 'R-4',
+          viewVal: 'R-4',
+          unitVal: '400.0000'
+        },
+        {
+          value: 'R-5-A',
+          viewVal: 'R-5-A',
+          unitVal: '300.0000'
+        },
+        {
+          value: 'R-5-B',
+          viewVal: 'R-5-B',
+          unitVal: '200.0000'
+        }
+      ]
+    },
+    {
+      value: 'AGRICULTURAL',
+      viewVal: 'AGRICULTURAL',
+      subC: [
+        {
+          value: 'A-1',
+          viewVal: 'A-1',
+          unitVal: '17.3300'
+        },
+        {
+          value: 'A-2',
+          viewVal: 'A-2',
+          unitVal: '15.9460'
+        },
+        {
+          value: 'A-3',
+          viewVal: 'A-3',
+          unitVal: '12.2490'
+        },
+        {
+          value: 'A-4',
+          viewVal: 'A-4',
+          unitVal: '9.8220'
+        },
+        {
+          value: 'B-1',
+          viewVal: 'B-1',
+          unitVal: '16.1620'
+        },
+        {
+          value: 'B-2',
+          viewVal: 'B-2',
+          unitVal: '14.5460'
+        },
+        {
+          value: 'B-3',
+          viewVal: 'B-3',
+          unitVal: '11.3130'
+        },
+        {
+          value: 'C-1',
+          viewVal: 'C-1',
+          unitVal: '24.5330'
+        },
+        {
+          value: 'C-2',
+          viewVal: 'C-2',
+          unitVal: '21.3350'
+        },
+        {
+          value: 'C-3',
+          viewVal: 'C-3',
+          unitVal: '13.0840'
+        },
+        {
+          value: 'D-1',
+          viewVal: 'D-1',
+          unitVal: '17.0000'
+        },
+        {
+          value: 'D-2',
+          viewVal: 'D-2',
+          unitVal: '15.3000'
+        },
+        {
+          value: 'D-3',
+          viewVal: 'D-3',
+          unitVal: '13.6000'
+        },
+        {
+          value: 'E-1',
+          viewVal: 'E-1',
+          unitVal: '9.3330'
+        },
+        {
+          value: 'E-2',
+          viewVal: 'E-2',
+          unitVal: '7.0000'
+        },
+        {
+          value: 'E-3',
+          viewVal: 'E-3',
+          unitVal: '4.6670'
+        },
+      ]
+    }
   ]
 
-  subClassLs: selectOpt[] = [
-    { value: 'C-1', viewVal: 'C-1' },
-    { value: 'C-2', viewVal: 'C-2' },
-    { value: 'C-3', viewVal: 'C-3' },
-    { value: 'C-4', viewVal: 'C-4' }
-  ]
-
-  actualUse: selectOpt[] = [
-    { value: 'COMMERCIAL', viewVal: 'COMMERCIAL' },
-    { value: 'INDUSTRIAL', viewVal: 'INDUSTRIAL' },
-    { value: 'RESIDENTIAL', viewVal: 'RESIDENTIAL' },
-    { value: 'AGRICULTURAL', viewVal: 'AGRICULTURAL' }
-  ]
+  lndAppSubc: number;
+  lndAppUnitVal: string;
+  subClassLs: any;
+  lndAppBMV: any;
 
   status: selectOpt[] = [
     { value: 'TAXABLE', viewVal: 'TAXABLE' },
@@ -108,22 +269,41 @@ export class LandAssessmentComponent implements OnInit {
     this.initializeForm();
   }
 
+  lndAppChngVal(grp: FormGroup) {
+    let val = grp.controls['class'].value;
+    let obj = _.find(this.landClassLs, {'value': val});
+    this.subClassLs = obj.subC;
+  }
+
+  lnAppSubCUV(grp: FormGroup) {
+    let val = grp.controls['subclass'].value;
+    let obj = _.find(this.subClassLs, {'value': val});
+    this.lndAppUnitVal = obj.unitVal;
+  }
+
+  computeBMV(grp: FormGroup) {
+    let area:number = +grp.controls['area'].value;
+    let unitVl:number = +grp.controls['unitVal'].value;
+    console.log(area * unitVl);
+    this.lndAppBMV = (area * unitVl).toString();
+  }
+
   save(form: object) {
     if (this.landAssessment.valid) {
       console.log(form)
     }
   }
 
-  setStripNumSel() {
+  setStripNumSel(grp: FormGroup) {
     this.stripNo = []
-    let cnt = +this.landAssessment.controls['stripSet'].controls['stripCount'].value
+    let cnt = +grp.controls['stripCount'].value
     for (let i = 1; i <= cnt; i++) {
       this.stripNo.push({ value: i.toString(), viewVal: i.toString() })
     }
   }
 
-  addOwner() {
-    let ownerData = this.landAssessment.get('ownerDetails').value
+  addOwner(grp: FormGroup) {
+    let ownerData = grp.value
     ownerLs.push({
       ownName: ownerData.ownfName + ' ' + ownerData.ownmName + ' ' + ownerData.ownlName,
       ownAddress: ownerData.ownaddress,
@@ -131,13 +311,13 @@ export class LandAssessmentComponent implements OnInit {
       ownTIN: ownerData.ownTIN
     })
     this.ownersLs = new MatTableDataSource(ownerLs)
-    Object.keys(this.landAssessment.controls['ownerDetails'].controls).forEach(key => {
-      this.landAssessment.controls['ownerDetails'].controls[key].reset()
+    Object.keys(grp.controls).forEach(key => {
+      grp.controls[key].reset()
     })
   }
 
-  addAdmin() {
-    let adminData = this.landAssessment.get('adminOwnerLs').value
+  addAdmin(grp: FormGroup) {
+    let adminData = grp.value
     adminLs.push({
       admName: adminData.admfName + ' ' + adminData.admmName + ' ' + adminData.admlName,
       admAddress: adminData.admaddress,
@@ -145,13 +325,13 @@ export class LandAssessmentComponent implements OnInit {
       admTIN: adminData.admTIN
     })
     this.adminsLs = new MatTableDataSource(adminLs)
-    Object.keys(this.landAssessment.controls['adminOwnerLs'].controls).forEach(key => {
-      this.landAssessment.controls['adminOwnerLs'].controls[key].reset()
+    Object.keys(grp.controls).forEach(key => {
+      grp.controls[key].reset()
     })
   }
 
-  addStrip() {
-    let stripData = this.landAssessment.get('stripSet').value
+  addStrip(grp: FormGroup) {
+    let stripData = grp.value
     stripInf.push({
       stripNum: stripData.stripNo,
       stripArea: stripData.stripArea,
@@ -160,15 +340,15 @@ export class LandAssessmentComponent implements OnInit {
       stripMarkVal: ''
     })
     this.stripSetInfo = new MatTableDataSource(stripInf)
-    Object.keys(this.landAssessment.controls['stripSet'].controls).forEach(key => {
+    Object.keys(grp.controls).forEach(key => {
       if (key != 'stripCount') {
-        this.landAssessment.controls['stripSet'].controls[key].reset()
+        grp.controls[key].reset()
       }
     })
   }
 
-  addImp() {
-    let impData = this.landAssessment.get('otherImprovements').value
+  addImp(grp: FormGroup) {
+    let impData = grp.value
     imprInf.push({
       kind: impData.kind,
       totalNo: impData.totalNo,
@@ -176,13 +356,13 @@ export class LandAssessmentComponent implements OnInit {
       baseMarkVal: impData.basicMarketVal
     })
     this.impInf = new MatTableDataSource(imprInf)
-    Object.keys(this.landAssessment.controls['otherImprovements'].controls).forEach(key => {
-      this.landAssessment.controls['otherImprovements'].controls[key].reset()
+    Object.keys(grp.controls).forEach(key => {
+      grp.controls[key].reset()
     })
   }
 
-  addMVal() {
-    let mValue = this.landAssessment.get('marketVal').value
+  addMVal(grp: FormGroup) {
+    let mValue = grp.value
     mrktVal.push({
       mBaseVal: '',
       mAdjustFactor: '',
@@ -191,8 +371,8 @@ export class LandAssessmentComponent implements OnInit {
       mMarketVal: ''
     })
     this.marketValue = new MatTableDataSource(mrktVal)
-    Object.keys(this.landAssessment.controls['marketVal'].controls).forEach(key => {
-      this.landAssessment.controls['marketVal'].controls[key].reset()
+    Object.keys(grp.controls).forEach(key => {
+      grp.controls[key].reset()
     })
   }
 
@@ -220,7 +400,6 @@ export class LandAssessmentComponent implements OnInit {
     _.remove(mrktVal, evt)
     this.marketValue = new MatTableDataSource(mrktVal)
   }
-
 
   initializeForm() {
     this.landAssessment = new FormGroup({
