@@ -257,21 +257,24 @@
         <mat-card-content formGroupName='landAppraisal'>
           <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
             fxLayoutGap.xs='10px'>
-          <mat-form-field class='item item-1' fxFlex='30%'>
-            <mat-label>Classification</mat-label>
-            <mat-select formControlName='class' (selectionChange)="lndAppChngVal(landAssessment.get('landAppraisal'))" required>
-              <mat-option *ngFor='let cls of landClassLs' [value]='cls.value'>{{ cls.viewVal }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class='item item-2' fxFlex='30%'>
-            <mat-label>Sub-Classification</mat-label>
-            <mat-select formControlName='subclass' (selectionChange)="lnAppSubCUV(landAssessment.get('landAppraisal'))" required>
-              <mat-option *ngFor='let subcls of subClassLs' [value]='subcls.value'>{{ subcls.viewVal }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class='item item-3' fxFlex='30%'>
-            <input matInput type='text' placeholder='Area' formControlName='area' (keyup)="computeBMV(landAssessment.get('landAppraisal'))">
-          </mat-form-field>
+            <mat-form-field class='item item-1' fxFlex='30%'>
+              <mat-label>Classification</mat-label>
+              <mat-select formControlName='class' (selectionChange)="lndAppChngVal(landAssessment.get('landAppraisal'))"
+                required>
+                <mat-option *ngFor='let cls of landClassLs' [value]='cls.value'>{{ cls.viewVal }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class='item item-2' fxFlex='30%'>
+              <mat-label>Sub-Classification</mat-label>
+              <mat-select formControlName='subclass'
+                (selectionChange)="lnAppSubCUV(landAssessment.get('landAppraisal'))" required>
+                <mat-option *ngFor='let subcls of subClassLs' [value]='subcls.value'>{{ subcls.viewVal }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class='item item-3' fxFlex='30%'>
+              <input matInput type='text' placeholder='Area (sqm)' formControlName='area'
+                (keyup)="computeBMV(landAssessment.get('landAppraisal'))">
+            </mat-form-field>
           </div>
           <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
             fxLayoutGap.xs='10px'>
@@ -279,14 +282,16 @@
               <input matInput type='text' placeholder='Unit Value' formControlName='unitVal' [value]='lndAppUnitVal'>
             </mat-form-field>
             <mat-form-field class='item item-2' fxFlex='30%'>
-              <input matInput type='text' placeholder='Base Market Value' formControlName='baseMarketVal' [value]='lndAppBMV'>
+              <input matInput type='text' placeholder='Base Market Value' formControlName='baseMarketVal'
+                [value]='lndAppBMV'>
             </mat-form-field>
             <div class='item item-3' fxFlex='30%'>
               <mat-checkbox formControlName='interiorLot'>Interior Lot</mat-checkbox>
               <br>
               <mat-checkbox formControlName='cornerLot'>Corner Lot</mat-checkbox>
               <br>
-              <mat-checkbox (change)="stripToggle(landAssessment.get('stripSet'))" formControlName='stripping'>Stripping</mat-checkbox>
+              <mat-checkbox (change)="stripToggle(landAssessment.get('stripSet'))" formControlName='stripping'>Stripping
+              </mat-checkbox>
             </div>
           </div>
         </mat-card-content>
@@ -300,7 +305,8 @@
           <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
             fxLayoutGap.xs='10px'>
             <mat-form-field class='item item-1' fxFlex='30%'>
-              <input matInput (keyup)="setStripNumSel(landAssessment.get('stripSet'))" type='text' placeholder='No. of Strips' formControlName='stripCount'>
+              <input matInput (keyup)="setStripNumSel(landAssessment.get('stripSet'))" type='text'
+                placeholder='No. of Strips' formControlName='stripCount'>
             </mat-form-field>
             <mat-form-field class='item item-2' fxFlex='30%'>
               <input matInput type='text' placeholder='Remaining Land Area' formControlName='remLandArea'>
@@ -311,16 +317,17 @@
           </div>
           <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
             fxLayoutGap.xs='10px'>
-            <mat-form-field class='item item-1'fxFlex='30%'>
+            <mat-form-field class='item item-1' fxFlex='30%'>
               <input matInput type='text' placeholder='Adjustment' formControlName='adjustment'>
             </mat-form-field>
-            <mat-form-field class='item item-2'fxFlex='30%'>
+            <mat-form-field class='item item-2' fxFlex='30%'>
               <mat-label>Strip Number</mat-label>
               <mat-select formControlName='stripNo'>
                 <mat-option *ngFor='let count of stripNo' [value]='count.value'>{{ count.viewVal }}</mat-option>
               </mat-select>
             </mat-form-field>
-            <button mat-raised-button class='item item-3' fxFlex='30%' [disabled]='!stripToggleVal' type='button' class='item item-3' fxFlex='30%' (click)="addStrip(landAssessment.get('stripSet'))"
+            <button mat-raised-button class='item item-3' fxFlex='30%' [disabled]='!stripToggleVal' type='button'
+              class='item item-3' fxFlex='30%' (click)="addStrip(landAssessment.get('stripSet'))"
               color='primary'>Add</button>
           </div>
           <br>
@@ -382,7 +389,8 @@
             <mat-form-field class='item item-1' fxFlex='30%'>
               <input matInput type='text' formControlName='basicMarketVal' placeholder='Base Market Value'>
             </mat-form-field>
-            <button mat-raised-button (click)="addImp(landAssessment.get('otherImprovements'))" type='button' color='primary' class='item item-2' fxFlex='30%'>Add</button>
+            <button mat-raised-button (click)="addImp(landAssessment.get('otherImprovements'))" type='button'
+              color='primary' class='item item-2' fxFlex='30%'>Add</button>
           </div>
           <br>
           <div class='containerX' fxLayout fxLayout.xs='column' fxLayoutAlign='center'>
@@ -441,14 +449,16 @@
               <input matInput type='text' placeholder='% Adjustment' formControlName='adjustmentPercent'>
             </mat-form-field>
           </div>
-          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
+            fxLayoutGap.xs='10px'>
             <mat-form-field class='item item-1' fxFlex='30%'>
               <input matInput type='text' placeholder='Value Adjustment' formControlName='adjustmentVal'>
             </mat-form-field>
             <mat-form-field class='item item-2' fxFlex='30%'>
               <input matInput type='text' placeholder='Market Value' formControlName='marketVal'>
             </mat-form-field>
-            <button type='button' (click)="addMVal(landAssessment.get('marketVal'))" mat-raised-button color='primary' class='item item-3' fxFlex='30%'>Add</button>
+            <button type='button' (click)="addMVal(landAssessment.get('marketVal'))" mat-raised-button color='primary'
+              class='item item-3' fxFlex='30%'>Add</button>
           </div>
           <br>
           <div class='containerX' fxLayout fxLayout.xs='column' fxLayoutAlign='center'>
@@ -586,7 +596,8 @@
           <mat-card-subtitle>Record of Superseded Assessment</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content formGroupName='supersededRec'>
-          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
+            fxLayoutGap.xs='10px'>
             <mat-form-field class='item item-1' fxFlex='30%'>
               <input matInput type='text' formControlName='supPin' placeholder='PIN'>
             </mat-form-field>
@@ -597,12 +608,14 @@
               <input matInput type='text' formControlName='supTDNo' placeholder='TD No.'>
             </mat-form-field>
           </div>
-          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
+            fxLayoutGap.xs='10px'>
             <mat-form-field class='item item-1' fxFlex='40%'>
               <input matInput type='text' formControlName='supTotalAssessedVal' placeholder='Total Assessed Value'>
             </mat-form-field>
           </div>
-          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
+            fxLayoutGap.xs='10px'>
             <mat-form-field class='item item 1' fxFlex='30%'>
               <input matInput type='text' formControlName='supPrevOwner' placeholder='Previous Owner'>
             </mat-form-field>
@@ -613,7 +626,8 @@
               <input matInput type='text' formControlName='supARPageNo' placeholder='AR Page No.'>
             </mat-form-field>
           </div>
-          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='10px'
+            fxLayoutGap.xs='10px'>
             <mat-form-field class='item item-1' fxFlex='40%'>
               <input matInput type='text' formControlName='supRecPersonnel' placeholder='Recording Personnel'>
             </mat-form-field>

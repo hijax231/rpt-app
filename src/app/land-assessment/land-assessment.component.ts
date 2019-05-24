@@ -63,7 +63,7 @@ export class LandAssessmentComponent implements OnInit {
   ]
 
   landClassLs: any = [
-    { 
+    {
       value: 'COMMERCIAL',
       viewVal: 'COMMERCIAL',
       subC: [
@@ -240,9 +240,10 @@ export class LandAssessmentComponent implements OnInit {
   ]
 
   lndAppSubc: number;
-  lndAppUnitVal: string;
+  lndAppUnitVal: string = '';
   subClassLs: any;
-  lndAppBMV: any;
+  lndAppBMV: string = '';
+  lndAppArea: string;
 
   status: selectOpt[] = [
     { value: 'TAXABLE', viewVal: 'TAXABLE' },
@@ -271,20 +272,24 @@ export class LandAssessmentComponent implements OnInit {
 
   lndAppChngVal(grp: FormGroup) {
     let val = grp.controls['class'].value;
-    let obj = _.find(this.landClassLs, {'value': val});
+    let obj = _.find(this.landClassLs, { 'value': val });
     this.subClassLs = obj.subC;
+    grp.controls['area'].reset();
+    grp.controls['unitVal'].reset();
+    grp.controls['baseMarketVal'].reset();
   }
 
   lnAppSubCUV(grp: FormGroup) {
     let val = grp.controls['subclass'].value;
-    let obj = _.find(this.subClassLs, {'value': val});
+    let obj = _.find(this.subClassLs, { 'value': val });
     this.lndAppUnitVal = obj.unitVal;
+    this.computeBMV(grp);
   }
 
   computeBMV(grp: FormGroup) {
-    let area:number = +grp.controls['area'].value;
-    let unitVl:number = +grp.controls['unitVal'].value;
-    console.log(area * unitVl);
+    (grp.controls['area'].value == null || grp.controls['area'].value == '') ? this.lndAppArea = '0' : this.lndAppArea = grp.controls['area'].value;
+    let area: number = parseFloat(this.lndAppArea);
+    let unitVl: number = parseFloat(this.lndAppUnitVal);
     this.lndAppBMV = (area * unitVl).toString();
   }
 
@@ -345,6 +350,10 @@ export class LandAssessmentComponent implements OnInit {
         grp.controls[key].reset()
       }
     })
+  }
+
+  stripComp() {
+
   }
 
   addImp(grp: FormGroup) {
