@@ -1,13 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import * as _ from 'lodash';
+import { adminOwner } from '../interfaces/adminOwner';
+
 
 export interface selectOpt {
   value: string;
   viewVal: string;
 }
+
+export interface landOwner {
+  ownName: string;
+  ownAddress: string;
+  ownContact: string;
+  ownTIN: string;
+}
+
+export interface additionalItems {
+
+}
+
+var ownerLs: landOwner[] = []
+var adminLs: adminOwner[] = []
+var addtnlItems: additionalItems[] = []
 
 @Component({
   selector: 'app-building-reassessment',
@@ -15,7 +33,9 @@ export interface selectOpt {
   styleUrls: ['./building-reassessment.component.sass']
 })
 export class BuildingReassessmentComponent implements OnInit {
-  //ownersLs = new MatTableDataSource(ownerLs)
+  ownersLs = new MatTableDataSource(ownerLs)
+  adminsLs = new MatTableDataSource(adminLs)
+  addItemsTable = new MatTableDataSource(addtnlItems)
 
   bldgOpt: selectOpt[] = [
     { value: 'DISCOVERY/NEW DECLARATION', viewVal: 'DISCOVERY/NEW DECLARATION (DC)' },
@@ -287,13 +307,13 @@ export class BuildingReassessmentComponent implements OnInit {
   ]
 
   //year Opts
-  yrOpts: selectOpt[] = [
-    { value: '2019', viewVal: '2019' },
-    { value: '2018', viewVal: '2018' },
-    { value: '2017', viewVal: '2017' },
-    { value: '2016', viewVal: '2016' },
-    { value: '2015', viewVal: '2015' },
-  ]
+  yrOpts: selectOpt[] = []
+  yrOptions() {
+    let curYr = new Date().getFullYear();
+    for (let i = curYr; i >= 1900; i--) {
+      this.yrOpts.push({ value: i.toString(), viewVal: i.toString() })
+    }
+  }
 
   public bldgAssessment: FormGroup;
 
@@ -305,7 +325,7 @@ export class BuildingReassessmentComponent implements OnInit {
   //Structural Desc Table
   strDescHeader: string[] = ['Floor No.', 'Area', 'Flooring Material', 'Wall Material', 'Floor Height', 'Standard Height', 'Adjusted Basic Rate', 'Floor Type']
   //Additional Item Table
-  aItemHeader: string[] = ['aItm', 'sType', 'sizem2', 'untCost', 'totalC']
+  aItemHeader: string[] = ['aItm', 'sType', 'sizem2', 'untCost', 'totalC', 'actions']
 
   ngOnInit() {
     if (!localStorage.getItem('auth')) {
@@ -345,11 +365,13 @@ export class BuildingReassessmentComponent implements OnInit {
       }),
 
       //buildingLocation
-      numSt: new FormControl(''),
-      bldgLoc: new FormControl(''),
-      prov: new FormControl(''),
-      brgy: new FormControl(''),
-      subd: new FormControl(''),
+      buildingLoc: new FormGroup({
+        numSt: new FormControl(''),
+        bldgLoc: new FormControl(''),
+        prov: new FormControl(''),
+        brgy: new FormControl(''),
+        subd: new FormControl(''),
+      }),
 
       //landReference
       landRef: new FormGroup({
@@ -382,16 +404,19 @@ export class BuildingReassessmentComponent implements OnInit {
         bldgflrs: new FormControl(''),
         flrArea: new FormControl(''),
         chckBoxFlrA: new FormControl(''),
-        flr1: new FormControl(''),
-        flr2: new FormControl(''),
-        flr3: new FormControl(''),
-        flr4: new FormControl(''),
-        flr5: new FormControl(''),
-        flr6: new FormControl(''),
+        flr1: new FormControl({ value: '', disabled: true }),
+        flr2: new FormControl({ value: '', disabled: true }),
+        flr3: new FormControl({ value: '', disabled: true }),
+        flr4: new FormControl({ value: '', disabled: true }),
+        flr5: new FormControl({ value: '', disabled: true }),
+        flr6: new FormControl({ value: '', disabled: true }),
+        flr7: new FormControl({ value: '', disabled: true }),
+        flr8: new FormControl({ value: '', disabled: true }),
         mats: new FormControl(''),
+        materials: new FormControl({ value: '', disabled: true }),
         othrs: new FormControl(''),
-        othrs2: new FormControl(''),
-        othrs3: new FormControl(''),
+        othrs2: new FormControl({ value: '', disabled: true }),
+        othrs3: new FormControl({ value: '', disabled: true }),
         othrsCB: new FormControl(''),
         othrsCB2: new FormControl(''),
         othrsCB3: new FormControl(''),
@@ -479,20 +504,184 @@ export class BuildingReassessmentComponent implements OnInit {
     })
   }
 
-  //addOwner() {
-  //let ownerData = this.landAssessment.get('ownerDetails').value
-  //ownerLs.push({
-  //ownName: ownerData.ownfName + ' ' + ownerData.ownmName + ' ' + ownerData.ownlName,
-  //ownAddress: ownerData.ownaddress,
-  //ownContact: ownerData.owncontact,
-  //ownTIN: ownerData.ownTIN
-  //})
-  //this.ownersLs = new MatTableDataSource(ownerLs)
-  //Object.keys(this.landAssessment.controls['ownerDetails'].controls).forEach(key => {
-  //this.landAssessment.controls['ownerDetails'].controls[key].reset()
-  //})
-  //}
+  removeOwnerDetail(evt: any) {
+    _.remove(ownerLs, evt)
+    this.ownersLs = new MatTableDataSource(ownerLs)
+  }
 
+  //ADD - REMOVE
+  addOwner() {
+    let ownerformData = this.bldgAssessment.get('ownerDetails').value;
+    if (ownerformData.ownaddress != '' && ownerformData.ownfName != '' && ownerformData.ownlName != '') {
+      ownerLs.push({
+        ownName: ownerformData.ownfName + ' ' + ownerformData.ownmName + ' ' + ownerformData.ownlName,
+        ownAddress: ownerformData.ownaddress,
+        ownContact: ownerformData.owncontact,
+        ownTIN: ownerformData.ownTIN
+      })
+      this.ownersLs = new MatTableDataSource(ownerLs)
+      Object.keys(this.bldgAssessment.controls['ownerDetails'].controls).forEach(key => {
+        this.bldgAssessment.controls['ownerDetails'].controls[key].reset()
+        this.bldgAssessment.controls['ownerDetails'].controls[key].value = '';
+      })
+
+    } else {
+
+    }
+  }
+
+  chckPIN() {
+    let pinNum = this.bldgAssessment.get('pin').value;
+  }
+
+  addAdmin() {
+    let adminData = this.bldgAssessment.get('adminOwnerLs').value;
+    if (adminData.admfName != '' && adminData.admaddress != '' && adminData.admlName != '') {
+      adminLs.push({
+        admName: adminData.admfName + ' ' + adminData.admmName + ' ' + adminData.admlName,
+        admAddress: adminData.admaddress,
+        admContact: adminData.admcontact,
+        admTIN: adminData.admTIN
+      })
+      this.adminsLs = new MatTableDataSource(adminLs)
+      Object.keys(this.bldgAssessment.controls['adminOwnerLs'].controls).forEach(key => {
+        this.bldgAssessment.controls['adminOwnerLs'].controls[key].reset()
+        this.bldgAssessment.controls['adminOwnerLs'].controls[key].value = '';
+      })
+    }
+  }
+
+  removeAdminDetail(evt: any) {
+    _.remove(adminLs, evt)
+    this.adminsLs = new MatTableDataSource(adminLs)
+  }
+
+  addAddItems() {
+    let aitemsData = this.bldgAssessment.get('additionalItems').value;
+    if (aitemsData.szem2 != '') {
+      addtnlItems.push({
+        adItms: aitemsData.aItem,
+        sTyp: aitemsData.subType,
+        sizeSqrd: aitemsData.szem2,
+        uc: aitemsData.uCost,
+        tc: aitemsData.tCost
+      })
+      this.addItemsTable = new MatTableDataSource(addtnlItems)
+      Object.keys(this.bldgAssessment.controls['additionalItems'].controls).forEach(key => {
+        this.bldgAssessment.controls['additionalItems'].controls[key].reset()
+        this.bldgAssessment.controls['additionalItems'].controls[key].value = '';
+      })
+    }
+  }
+
+  removeAI(evt: any) {
+    _.remove(addtnlItems, evt)
+    this.addItemsTable = new MatTableDataSource(addtnlItems)
+  }
+
+  //CHECKBOX TOGGLE
+  ToggleVal = false;
+  roofCbToggle = false;
+  flrCbToggleOthrs = false;
+  flrCbToggleOthrs2 = false;
+  flrsmeMatsToggleVal = false;
+  flrsmeMatsToggleVal2 = false;
+  flrsmeMatsToggleVal3 = false;
+
+  smeAreaToggleBtn() {
+    this.ToggleVal = !this.ToggleVal
+    if (this.ToggleVal) {
+      Object.keys(this.bldgAssessment.controls['strDescG'].controls).forEach(key => {
+        this.bldgAssessment.controls['strDescG'].controls['flr1'].enable()
+        this.bldgAssessment.controls['strDescG'].controls['flr2'].enable()
+      })
+    } else {
+      Object.keys(this.bldgAssessment.controls['strDescG'].controls).forEach(key => {
+        this.bldgAssessment.controls['strDescG'].controls['flr1'].disable()
+        this.bldgAssessment.controls['strDescG'].controls['flr2'].disable()
+        this.bldgAssessment.controls['strDescG'].controls['flr1'].reset()
+        this.bldgAssessment.controls['strDescG'].controls['flr2'].reset()
+      })
+    }
+  }
+
+  toggleMats() {
+    this.roofCbToggle = !this.roofCbToggle
+    if (this.roofCbToggle) {
+      this.bldgAssessment.controls['strDescG'].controls['materials'].enable();
+      this.bldgAssessment.controls['strDescG'].controls['mats'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['mats'].reset();
+    } else {
+      this.bldgAssessment.controls['strDescG'].controls['materials'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['materials'].reset();
+      this.bldgAssessment.controls['strDescG'].controls['mats'].enable();
+    }
+  }
+
+  cbtoggle() {
+    this.flrCbToggleOthrs = !this.flrCbToggleOthrs
+    if (this.flrCbToggleOthrs) {
+      this.bldgAssessment.controls['strDescG'].controls['othrs2'].enable();
+      this.bldgAssessment.controls['strDescG'].controls['mats2'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['mats2'].reset();
+    } else {
+      this.bldgAssessment.controls['strDescG'].controls['othrs2'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['mats2'].enable();
+      this.bldgAssessment.controls['strDescG'].controls['othrs2'].reset();
+    }
+  }
+
+  cbtoggle2() {
+    this.flrCbToggleOthrs2 = !this.flrCbToggleOthrs2
+    if (this.flrCbToggleOthrs2) {
+      this.bldgAssessment.controls['strDescG'].controls['othrs3'].enable();
+      this.bldgAssessment.controls['strDescG'].controls['mats3'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['mats3'].reset();
+    } else {
+      this.bldgAssessment.controls['strDescG'].controls['othrs3'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['mats3'].enable();
+      this.bldgAssessment.controls['strDescG'].controls['othrs3'].reset();
+    }
+  }
+
+  flrsmeMatsToggle() {
+    this.flrsmeMatsToggleVal = !this.flrsmeMatsToggleVal
+    if (this.flrsmeMatsToggleVal) {
+      this.bldgAssessment.controls['strDescG'].controls['flr5'].enable();
+      this.bldgAssessment.controls['strDescG'].controls['flr6'].enable();
+    } else {
+      this.bldgAssessment.controls['strDescG'].controls['flr5'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['flr6'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['flr5'].reset();
+      this.bldgAssessment.controls['strDescG'].controls['flr6'].reset();
+    }
+  }
+
+  flrMatsToggle() {
+    this.flrsmeMatsToggleVal2 = !this.flrsmeMatsToggleVal2
+    if (this.flrsmeMatsToggleVal2) {
+      this.bldgAssessment.controls['strDescG'].controls['flr3'].enable();
+      this.bldgAssessment.controls['strDescG'].controls['flr4'].enable();
+    } else {
+      this.bldgAssessment.controls['strDescG'].controls['flr3'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['flr4'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['flr3'].reset();
+      this.bldgAssessment.controls['strDescG'].controls['flr4'].reset();
+    }
+  }
+
+  flrMatsToggle2() {
+    this.flrsmeMatsToggleVal3 = !this.flrsmeMatsToggleVal3
+    if (this.flrsmeMatsToggleVal3) {
+      this.bldgAssessment.controls['strDescG'].controls['flr7'].enable();
+      this.bldgAssessment.controls['strDescG'].controls['flr8'].enable();
+    } else {
+      this.bldgAssessment.controls['strDescG'].controls['flr7'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['flr8'].disable();
+      this.bldgAssessment.controls['strDescG'].controls['flr7'].reset();
+      this.bldgAssessment.controls['strDescG'].controls['flr8'].reset();
+    }
+  }
 }
 
 export default BuildingReassessmentComponent
