@@ -28,7 +28,8 @@ export class MainNavComponent {
   navs: Nav[] = [
     { route: '/user/' + this.getUser() + '/assessments', text: 'Assessments' },
     { route: '/user/' + this.getUser() + '/reassessments', text: 'Reassessments' },
-    { route: '/user/' + this.getUser() + '/faas-records', text: 'Faas Records' }
+    { route: '/user/' + this.getUser() + '/faas-records', text: 'Faas Records' },
+    { route: '/user/' + this.getUser() + '/land-tax', text: 'Land Tax'},
   ]
 
   getUser() {

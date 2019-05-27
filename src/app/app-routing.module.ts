@@ -11,6 +11,7 @@ import ReassessmentsComponent from './reassessments/reassessments.component';
 import LandReassessmentComponent from './land-reassessment/land-reassessment.component';
 import BuildingReassessmentComponent from './building-reassessment/building-reassessment.component';
 import FaasRecComponent from './faas-rec/faas-rec.component';
+import { LandTaxComponent } from './land-tax/land-tax.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'user/:username/reassessments/land', component: LandReassessmentComponent },
   { path: 'user/:username/reassessments/building', component: BuildingReassessmentComponent },
   { path: 'user/:username/faas-records', component: FaasRecComponent },
+  { path: 'user/:username/land-tax', component: LandTaxComponent },
 ];
 
 @NgModule({
@@ -43,5 +45,6 @@ export const routingComponents = [
   ReassessmentsComponent,
   LandReassessmentComponent,
   BuildingReassessmentComponent,
-  FaasRecComponent
+  FaasRecComponent,
+  LandTaxComponent
 ]
