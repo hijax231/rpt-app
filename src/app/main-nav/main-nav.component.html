@@ -2,9 +2,10 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport="false" (click)="drawer.toggle()"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="side" [opened]="false">
     <mat-toolbar color="primary">
-      <!-- <img src='../assets/SPCLOGO.png'> -->
+      <!-- <img src='../assets/SPCLOGO.png'>
       <span *ngIf='nonAuth()'>Menu</span>
-      <span *ngIf='loggedIn()'>{{ userFullName }}</span>
+      <span *ngIf='loggedIn()'>{{ userFullName }}</span>-->
+      <span>Menu</span>
     </mat-toolbar>
     <mat-nav-list *ngIf='nonAuth()'>
       <a mat-list-item routerLink="/login">Login</a>
@@ -14,6 +15,8 @@
       <div *ngFor='let nav of navs'>
         <a mat-list-item routerLink="{{nav.route}}">{{nav.text}}</a>
       </div>
+      <hr width='90%'>
+      <a mat-list-item>Land Tax</a>
       <a mat-list-item (click)="logOut()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -22,7 +25,8 @@
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>RPT Web Application</span>
+      <span class='spanRPT'>RPT Web Application</span>
+      <span *ngIf='loggedIn()'>{{ userFullName }}</span>
     </mat-toolbar>
     <ng-content></ng-content>
     <!-- Add Content Here -->

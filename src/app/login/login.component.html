@@ -1,5 +1,11 @@
-<div class='login-form'>
-	<mat-card>
+<!--<div class='login-form'>-->
+<div class='login-form' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='10px'
+	fxLayoutGap.xs='10px'>
+	<mat-card fxFlex='50%'>
+		<div class="center">
+			<h2>Real Property Tax</h2>
+		<img src='../assets/SPCLOGO.png'>
+		</div>
 		<form [formGroup]='loginForm' (ngSubmit)='login(loginForm.value)' novalidate>
 		<mat-card-header>
 			<mat-card-title>Login</mat-card-title>
