@@ -21,6 +21,7 @@ import { ReassessmentsComponent } from './reassessments/reassessments.component'
 import { LandReassessmentComponent } from './land-reassessment/land-reassessment.component';
 import { BuildingReassessmentComponent } from './building-reassessment/building-reassessment.component';
 import { FaasRecComponent } from './faas-rec/faas-rec.component';
+import { LandTaxComponent } from './land-tax/land-tax.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FaasRecComponent } from './faas-rec/faas-rec.component';
     LandReassessmentComponent,
     BuildingReassessmentComponent,
     FaasRecComponent,
+    LandTaxComponent,
   ],
   imports: [
     BrowserModule,

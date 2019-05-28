@@ -331,7 +331,7 @@ export class BuildingReassessmentComponent implements OnInit {
     if (!localStorage.getItem('auth')) {
       this.router.navigate(['/login'])
     }
-    this.bldgReassessment = new FormGroup({
+    this.bldgAssessment = new FormGroup({
       bldgCode: new FormControl('', [Validators.required]),
       arpNo: new FormControl('', [Validators.required]),
 
@@ -596,7 +596,7 @@ export class BuildingReassessmentComponent implements OnInit {
         this.bldgReassessment.controls['strDescG'].controls['flr2'].enable()
       })
     } else {
-      Object.keys(this.bldgReassessment.controls['strDescG'].controls).forEach(key => {
+      Object.keys(this.bldgAssessment.controls['strDescG'].controls).forEach(key => {
         this.bldgReassessment.controls['strDescG'].controls['flr1'].disable()
         this.bldgReassessment.controls['strDescG'].controls['flr2'].disable()
         this.bldgReassessment.controls['strDescG'].controls['flr1'].reset()
