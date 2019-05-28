@@ -30,7 +30,7 @@ var addtnlItems: additionalItems[] = []
 @Component({
   selector: 'app-building-assessment',
   templateUrl: './building-assessment.component.html',
-  styleUrls: ['./building-assessment.component.sass']
+  styleUrls: ['./building-assessment.component.scss']
 })
 export class BuildingAssessmentComponent implements OnInit {
   ownersLs = new MatTableDataSource(ownerLs)

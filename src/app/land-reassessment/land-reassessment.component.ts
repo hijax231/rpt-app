@@ -20,7 +20,7 @@ var mrktVal: marketValue[] = []
 @Component({
   selector: 'app-land-reassessment',
   templateUrl: './land-reassessment.component.html',
-  styleUrls: ['./land-reassessment.component.sass']
+  styleUrls: ['./land-reassessment.component.scss']
 })
 export class LandReassessmentComponent implements OnInit {
 

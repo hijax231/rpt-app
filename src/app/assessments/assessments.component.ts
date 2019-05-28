@@ -5,7 +5,7 @@ import * as jwt_decode from 'jwt-decode';
 @Component({
   selector: 'app-assessments',
   templateUrl: './assessments.component.html',
-  styleUrls: ['./assessments.component.sass']
+  styleUrls: ['./assessments.component.scss']
 })
 export class AssessmentsComponent implements OnInit {
 

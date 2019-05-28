@@ -6,7 +6,7 @@ import { searchRec } from '../services/searchFaasRec.service';
 @Component({
   selector: 'app-faas-rec',
   templateUrl: './faas-rec.component.html',
-  styleUrls: ['./faas-rec.component.sass']
+  styleUrls: ['./faas-rec.component.scss']
 })
 export class FaasRecComponent implements OnInit {
 

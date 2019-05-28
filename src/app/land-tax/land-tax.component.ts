@@ -10,7 +10,7 @@ var ltTableLs: landTaxTable[] = []
 @Component({
   selector: 'app-land-tax',
   templateUrl: './land-tax.component.html',
-  styleUrls: ['./land-tax.component.sass']
+  styleUrls: ['./land-tax.component.scss']
 })
 export class LandTaxComponent implements OnInit {
 
