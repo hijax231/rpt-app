@@ -1,7 +1,10 @@
 <form [formGroup]='landAssessment' (ngSubmit)='save(landAssessment.value)' novalidate>
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Add Land</mat-card-title>
+      <mat-card-title>
+        <div class='fl'><img src='../assets/land.png'></div>
+        <div class='mat-stitle'>&nbsp;Add land</div>
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <!-- Transaction code -->
