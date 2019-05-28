@@ -34,7 +34,7 @@ export class LandReassessmentComponent implements OnInit {
 
   stripToggleVal = false
 
-  stripToggle(grp: FormGroup) {
+  stripToggle(grp: any) {
     this.stripToggleVal = !this.stripToggleVal
     if (this.stripToggleVal) {
       Object.keys(grp.controls).forEach(key => {
@@ -248,6 +248,13 @@ export class LandReassessmentComponent implements OnInit {
   lndAppBMV: string = '';
   lndAppArea: string;
 
+  actualUse: selectOpt[] = [
+    { value: 'COMMERCIAL', viewVal: 'COMMERCIAL' },
+    { value: 'INDUSTRIAL', viewVal: 'INDUSTRIAL' },
+    { value: 'RESIDENTIAL', viewVal: 'RESIDENTIAL' },
+    { value: 'AGRICULTURAL', viewVal: 'AGRICULTURAL' }
+  ]
+
   status: selectOpt[] = [
     { value: 'TAXABLE', viewVal: 'TAXABLE' },
     { value: 'EXEMPTED', viewVal: 'EXEMPTED' }
@@ -273,7 +280,7 @@ export class LandReassessmentComponent implements OnInit {
     this.initializeForm();
   }
 
-  lndAppChngVal(grp: FormGroup) {
+  lndAppChngVal(grp: any) {
     let val = grp.controls['class'].value;
     let obj = _.find(this.landClassLs, { 'value': val });
     this.subClassLs = obj.subC;
@@ -282,7 +289,7 @@ export class LandReassessmentComponent implements OnInit {
     grp.controls['baseMarketVal'].reset();
   }
 
-  checkPIN(grp: FormGroup) {
+  checkPIN(grp: any) {
     let pin = {
       city: grp.controls['city'].value,
       dist: grp.controls['district'].value,
@@ -295,14 +302,14 @@ export class LandReassessmentComponent implements OnInit {
     });
   }
 
-  lnAppSubCUV(grp: FormGroup) {
+  lnAppSubCUV(grp: any) {
     let val = grp.controls['subclass'].value;
     let obj = _.find(this.subClassLs, { 'value': val });
     this.lndAppUnitVal = obj.unitVal;
     this.computeBMV(grp);
   }
 
-  computeBMV(grp: FormGroup) {
+  computeBMV(grp: any) {
     (grp.controls['area'].value == null || grp.controls['area'].value == '') ? this.lndAppArea = '0' : this.lndAppArea = grp.controls['area'].value;
     let area: number = parseFloat(this.lndAppArea);
     let unitVl: number = parseFloat(this.lndAppUnitVal);
@@ -315,7 +322,7 @@ export class LandReassessmentComponent implements OnInit {
     }
   }
 
-  setStripNumSel(grp: FormGroup) {
+  setStripNumSel(grp: any) {
     this.stripNo = []
     let cnt = +grp.controls['stripCount'].value
     for (let i = 1; i <= cnt; i++) {
@@ -323,7 +330,7 @@ export class LandReassessmentComponent implements OnInit {
     }
   }
 
-  addOwner(grp: FormGroup) {
+  addOwner(grp: any) {
     let ownerData = grp.value
     ownerLs.push({
       ownName: ownerData.ownfName + ' ' + ownerData.ownmName + ' ' + ownerData.ownlName,
@@ -337,7 +344,7 @@ export class LandReassessmentComponent implements OnInit {
     })
   }
 
-  addAdmin(grp: FormGroup) {
+  addAdmin(grp: any) {
     let adminData = grp.value
     adminLs.push({
       admName: adminData.admfName + ' ' + adminData.admmName + ' ' + adminData.admlName,
@@ -351,7 +358,7 @@ export class LandReassessmentComponent implements OnInit {
     })
   }
 
-  addStrip(grp: FormGroup) {
+  addStrip(grp: any) {
     let stripData = grp.value
     stripInf.push({
       stripNum: stripData.stripNo,
@@ -372,7 +379,7 @@ export class LandReassessmentComponent implements OnInit {
 
   }
 
-  addImp(grp: FormGroup) {
+  addImp(grp: any) {
     let impData = grp.value
     imprInf.push({
       kind: impData.kind,
@@ -386,7 +393,7 @@ export class LandReassessmentComponent implements OnInit {
     })
   }
 
-  addMVal(grp: FormGroup) {
+  addMVal(grp: any) {
     let mValue = grp.value
     mrktVal.push({
       mBaseVal: '',

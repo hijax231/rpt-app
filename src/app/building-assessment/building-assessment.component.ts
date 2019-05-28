@@ -36,6 +36,7 @@ export class BuildingAssessmentComponent implements OnInit {
   ownersLs = new MatTableDataSource(ownerLs)
   adminsLs = new MatTableDataSource(adminLs)
   addItemsTable = new MatTableDataSource(addtnlItems)
+  mdpdateOccupied;
 
   bldgOpt: selectOpt[] = [
     { value: 'DISCOVERY/NEW DECLARATION', viewVal: 'DISCOVERY/NEW DECLARATION (DC)' },
@@ -510,7 +511,7 @@ export class BuildingAssessmentComponent implements OnInit {
   }
 
   //ADD - REMOVE
-  addOwner(grp: FormGroup) {
+  addOwner(grp: any) {
     let ownerformData = grp.value;
     ownerLs.push({
       ownName: ownerformData.ownfName + ' ' + ownerformData.ownmName + ' ' + ownerformData.ownlName,
@@ -524,11 +525,11 @@ export class BuildingAssessmentComponent implements OnInit {
     })
   }
 
-  chckPIN(grp: FormGroup) {
+  chckPIN(grp: any) {
     let pinNum = grp.value;
   }
 
-  addAdmin(grp: FormGroup) {
+  addAdmin(grp: any) {
     let adminData = grp.value;
     adminLs.push({
       admName: adminData.admfName + ' ' + adminData.admmName + ' ' + adminData.admlName,
@@ -547,7 +548,7 @@ export class BuildingAssessmentComponent implements OnInit {
     this.adminsLs = new MatTableDataSource(adminLs)
   }
 
-  addAddItems(grp: FormGroup) {
+  addAddItems(grp: any) {
     let aitemsData = grp.value;
     addtnlItems.push({
       adItms: aitemsData.aItem,
@@ -576,7 +577,7 @@ export class BuildingAssessmentComponent implements OnInit {
   flrsmeMatsToggleVal2 = false;
   flrsmeMatsToggleVal3 = false;
 
-  smeAreaToggleBtn(grp: FormGroup) {
+  smeAreaToggleBtn(grp: any) {
     this.ToggleVal = !this.ToggleVal
     if (this.ToggleVal) {
       Object.keys(grp.controls).forEach(key => {

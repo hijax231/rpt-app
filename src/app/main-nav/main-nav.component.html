@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="false" (click)="drawer.toggle()"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="side" [opened]="false">
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [opened]="false">
     <mat-toolbar color="primary">
       <!-- <img src='../assets/SPCLOGO.png'>
       <span *ngIf='nonAuth()'>Menu</span>

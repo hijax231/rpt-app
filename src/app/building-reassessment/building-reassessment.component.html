@@ -105,7 +105,7 @@
             </mat-form-field>
 
             <button mat-raised-button type='button' class='item item-3' fxFlex='30%' color='primary'
-              (click)="addOwner(bldgAssessment.get('ownerDetails'))">Add</button>
+              (click)="addOwner()">Add</button>
           </div>
           <br>
 
@@ -386,9 +386,9 @@
             </mat-form-field>
 
             <mat-form-field class='item item-2' fxFlex='45%'>
-              <input matInput placeholder='Date Occupied' [matDatepicker]="dateOccupied" formControlName='dateOccupied'
+              <input matInput placeholder='Date Occupied' [matDatepicker]="mdpdateOccupied" formControlName='dateOccupied'
                 required>
-              <mat-datepicker-toggle matSuffix [for]="dateOccupied"></mat-datepicker-toggle>
+              <mat-datepicker-toggle matSuffix [for]="mdpdateOccupied"></mat-datepicker-toggle>
               <mat-datepicker #permitIssue></mat-datepicker>
             </mat-form-field>
           </div>
