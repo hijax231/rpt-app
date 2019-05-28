@@ -35,12 +35,6 @@ export class LoginComponent implements OnInit {
         password: form.password
       }
       this.auth.authenticateUser(data).subscribe(res => {
-        // let decodedToken = jwt_decode(res.token)
-        // let authRes: loginAuthRes = {
-        //   iat: decodedToken.iat,
-        //   name: decodedToken.name,
-        //   username: decodedToken.username
-        // }
         if(!res.success){
 
         } else {

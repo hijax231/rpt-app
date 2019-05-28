@@ -45,7 +45,12 @@
                 <input matInput type='text' formControlName='parcel' required>
               </mat-form-field>
               <span>&nbsp;&nbsp;&nbsp;</span>
-              <button type='button' mat-raised-button color='primary'>Check PIN</button>
+              <button type='button' mat-raised-button color='primary'
+                (click)="checkPIN(landAssessment.get('pin'))">Check PIN</button>
+              <span>&nbsp;&nbsp;&nbsp;</span>
+              <span>
+                <mat-icon>{{ checkpinresult }}</mat-icon>
+              </span>
             </div>
             <div class='item item-3' fxFlex='10%'></div>
           </div>
@@ -508,7 +513,8 @@
             </table>
           </div>
           <br>
-          <div class='container' fxLayout fxLayout.xs='column' fxLayoutGap='10px' fxLayoutGap.xs='10px' fxLayoutAlign='center'>
+          <div class='container' fxLayout fxLayout.xs='column' fxLayoutGap='10px' fxLayoutGap.xs='10px'
+            fxLayoutAlign='center'>
             <mat-form-field class='item item-1' fxFlex='30%'>
               <input matInput type='text' placeholder='Sub Total' formControlName='mvSubTotal'>
             </mat-form-field>

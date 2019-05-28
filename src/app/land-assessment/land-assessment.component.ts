@@ -9,6 +9,7 @@ import { adminOwner } from '../interfaces/adminOwner';
 import { stripInfo } from '../interfaces/stripInfo';
 import { improvementInfo } from '../interfaces/improvementInfo';
 import { marketValue } from '../interfaces/marketValue';
+import { pincheck } from '../services/pincheck.service';
 
 var ownerLs: landOwner[] = []
 var adminLs: adminOwner[] = []
@@ -22,6 +23,8 @@ var mrktVal: marketValue[] = []
   styleUrls: ['./land-assessment.component.sass']
 })
 export class LandAssessmentComponent implements OnInit {
+
+  checkpinresult = 'help';
 
   ownersLs = new MatTableDataSource(ownerLs)
   adminsLs = new MatTableDataSource(adminLs)
@@ -55,7 +58,7 @@ export class LandAssessmentComponent implements OnInit {
     { value: 'SUBDIVISION', viewVal: 'SUBDIVISION (SD)' },
     { value: 'CONSOLIDATION', viewVal: 'CONSOLIDATION (CS)' },
     { value: 'PHYSICAL CHANGE', viewVal: 'PHYSICAL CHANGE (PC)' },
-    { value: 'DISPUTE IN ASSESSD VALUE', viewVal: 'DISPUTE IN ASSESSD VALUE (DP)' },
+    { value: 'DISPUTE IN ASSESSED VALUE', viewVal: 'DISPUTE IN ASSESSED VALUE (DP)' },
     { value: 'TRANSFER', viewVal: 'TRANSFER (TR)' },
     { value: 'SEGREGATION', viewVal: 'SEGREGATION (SG)' },
     { value: 'RECLASSIFICATIO', viewVal: 'RECLASSIFICATION (RC)' },
@@ -261,7 +264,7 @@ export class LandAssessmentComponent implements OnInit {
 
   public landAssessment: FormGroup;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private chckpin: pincheck) { }
 
   ngOnInit() {
     if (!localStorage.getItem('auth')) {
@@ -277,6 +280,19 @@ export class LandAssessmentComponent implements OnInit {
     grp.controls['area'].reset();
     grp.controls['unitVal'].reset();
     grp.controls['baseMarketVal'].reset();
+  }
+
+  checkPIN(grp: FormGroup) {
+    let pin = {
+      city: grp.controls['city'].value,
+      dist: grp.controls['district'].value,
+      brgy: grp.controls['barangay'].value,
+      sect: grp.controls['section'].value,
+      prcl: grp.controls['parcel'].value
+    }
+    this.chckpin.checkPin(pin).subscribe(res => {
+      (res.success) ? this.checkpinresult = 'check' : this.checkpinresult = 'close';
+    });
   }
 
   lnAppSubCUV(grp: FormGroup) {

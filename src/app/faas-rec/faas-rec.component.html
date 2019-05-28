@@ -20,5 +20,74 @@
       </mat-form-field>
       <button mat-raised-button class='item item-2' fxFlex='15%' color='primary' (click)='search()'>Search</button>
     </div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle>Result</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class='container' fxLayout='row' fxLayout.xs='column' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+          <div class='item item-1' fxFlex='30%'>
+            <p>ARP No.: {{ arpNo }}</p>
+            <p>Survey No.: {{ surveyNo }}</p>
+            <p>OCT TCT No.: {{ octtct }}</p>
+            <p>Lot No.: {{ lotNo }}</p>
+          </div>
+          <div class='item item-2' fxFlex='30%'>
+            <p>Street No.: {{ streetNo }}</p>
+            <p>Barangay: {{ barangay }}</p>
+            <p>Subdivision: {{ subdv }}</p>
+            <p>City: {{ city }}</p>
+            <p>Province: {{ province }}</p>
+          </div>
+          <div class='item item-3' fxFlex='30%'>
+            <p>North: {{ north }}</p>
+            <p>South: {{ south }}</p>
+            <p>East: {{ east }}</p>
+            <p>West: {{ west }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle>Owner</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class='container' fxLayout='row' fxLayout.xs='column' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+          <div class='item item-1' fxFlex='30%'>
+            <div *ngFor='let owner of owners'>
+              <p>Name: {{ owner.first_name }} {{ owner.middle_name }} {{ owner.last_name }}</p>
+              <p>Address: {{ owner.address }}</p>
+              <p>Contact: {{ owner.contact_no }}</p>
+              <p>TIN: {{ owner.TIN }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class='container' fxLayout='row' fxLayout.xs='column' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
+          <div class='item item-1' fxFlex='40%'>
+            <p>Class: {{ lClass }}</p>
+            <p>Sub class: {{ lsubClass }}</p>
+            <p>Area: {{ area }}</p>
+            <p>Unit Value: {{ unitVal }}</p>
+            <p>Base Market Value: {{ baseMVal }}</p>
+            <p>Total Base Market Value: {{ totalBaseMVal }}</p>
+          </div>
+          <div class='item item-2' fxFlex='40%'>
+            <p>Actual Use: {{ actualUse }}</p>
+            <p>Market Value: {{ paMVal }}</p>
+            <p>Assessment Lvl: {{ paAssessLvl }}</p>
+            <p>Assessed Value: {{ paAssessVal }}</p>
+            <p>Total Assessed Value: {{ paTotalAssessVal }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </mat-card-content>
 </mat-card>
