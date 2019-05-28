@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import HomeComponent from './home/home.component';
-import LoginComponent from './login/login.component';
-import RegisterComponent from './register/register.component';
-import LandingPageComponent from './landing-page/landing-page.component';
-import LandAssessmentComponent from './land-assessment/land-assessment.component';
-import BuildingAssessmentComponent from './building-assessment/building-assessment.component';
-import AssessmentsComponent from './assessments/assessments.component';
-import ReassessmentsComponent from './reassessments/reassessments.component';
-import LandReassessmentComponent from './land-reassessment/land-reassessment.component';
-import BuildingReassessmentComponent from './building-reassessment/building-reassessment.component';
-import FaasRecComponent from './faas-rec/faas-rec.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LandAssessmentComponent } from './land-assessment/land-assessment.component';
+import { BuildingAssessmentComponent } from './building-assessment/building-assessment.component';
+import { AssessmentsComponent } from './assessments/assessments.component';
+import { ReassessmentsComponent } from './reassessments/reassessments.component';
+import { LandReassessmentComponent } from './land-reassessment/land-reassessment.component';
+import { BuildingReassessmentComponent } from './building-reassessment/building-reassessment.component';
+import { FaasRecComponent } from './faas-rec/faas-rec.component';
 import { LandTaxComponent } from './land-tax/land-tax.component';
 
 
