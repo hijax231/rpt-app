@@ -5,5 +5,8 @@ button { width: 50%; }
 .center { text-align: center; }
 .login-form { margin: 30px 20% 50px 20%; }
 
-@media (max-width: 999px)
-  .login-form { margin: 30px 5% 50px 5%; }
+@media (max-width: 999px){
+  .login-form {
+    margin: 30px 5% 50px 5%;
+    }
+}
