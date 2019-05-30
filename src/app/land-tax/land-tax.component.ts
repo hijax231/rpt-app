@@ -4,7 +4,9 @@ import { searchRec } from '../services/searchFaasRec.service';
 import { landTaxTable } from '../interfaces/landTaxTable';
 import { landTaxInfOwn } from '../interfaces/landTaxInfOwn';
 import { landTaxInfAdm } from '../interfaces/landTaxInfAdm';
+import { genLandTaxCl } from '../services/genLandTaxCl';
 import { MatTableDataSource } from '@angular/material';
+import { lTaxClearance } from '../classes/lTaxClearance';
 import * as _ from 'lodash';
 
 var ltTableLs: landTaxTable[] = []
@@ -22,6 +24,20 @@ export class LandTaxComponent implements OnInit {
   LTTableInfOwn = new MatTableDataSource(ltTableInfOwner);
   LTTableInfAdm = new MatTableDataSource(ltTableInfAdmin);
 
+  input1: string;
+  amount: string;
+  CTONo: string;
+  dated: string;
+  requestor: string;
+  purpose: string;
+  encoder1: string;
+  date: string;
+  certfee: string;
+  amt: string;
+  orNo: string;
+  remarks: string;
+
+
   lTaxHeader: string[] = [
     'arpNo','pin','surveyNo','lotNo','blockNo',
     'streetNo','brgy','subd','city','province',
@@ -36,7 +52,7 @@ export class LandTaxComponent implements OnInit {
     'admName', 'admAddress', 'admContact', 'admTIN'
   ];
 
-  constructor(private srchRec: searchRec) { }
+  constructor(private srchRec: searchRec, private genFile: genLandTaxCl) { }
 
   ngOnInit() {
   }
@@ -54,6 +70,14 @@ export class LandTaxComponent implements OnInit {
     { value: 'arpNo', viewVal: 'ARP No.' },
     { value: 'name', viewVal: 'Name' },
   ];
+
+  prps: selectOpt[] = [
+    { value: 's1', viewVal: 'Cancellation/Registration of mortgage contract' },
+    { value: 's2', viewVal: 'Transfer of ownership' },
+    { value: 's3', viewVal: 'Bank Loan/Pag-ibig Loan' },
+    { value: 's4', viewVal: 'Business Permit' },
+    { value: 's5', viewVal: 'Others: For whatever legal purpose' },
+  ]
 
   search() {
     ltTableLs = []
@@ -116,6 +140,38 @@ export class LandTaxComponent implements OnInit {
       this.LTTableInfOwn = new MatTableDataSource(ltTableInfOwner);
       this.LTTableInfAdm = new MatTableDataSource(ltTableInfAdmin);
     });
+  }
+
+  genCl() {
+    let data: lTaxClearance = {
+      current_date: '',
+      owner_names: '',
+      pin: '',
+      arp_no: '',
+      location: '',
+      assessed_value: '',
+      payment_reason: this.input1,
+      total_amount: this.amount,
+      cto_no: this.CTONo,
+      name_of_requestor: this.requestor,
+      s1: '',
+      s2: '',
+      s3: '',
+      s4: '',
+      s5: '',
+      verified_by: '',
+      by_name1: '',
+      by_title1: '',
+      certification_fee: this.certfee,
+      or_no: this.orNo,
+      date: this.date,
+      amount: this.amt,
+      by_name2: '',
+      by_title2: '',
+      remarks: this.remarks
+    };
+    
+    this.genFile.lTaxCl(data);
   }
 
 }

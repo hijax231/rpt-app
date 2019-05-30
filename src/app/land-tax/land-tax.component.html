@@ -156,11 +156,11 @@
                 The latest payment of the tax of the above-described property is for the&nbsp;&nbsp;&nbsp;
               </span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='input1'>
               </mat-form-field>
               <span>&nbsp;&nbsp;&nbsp;for the total amount of P&nbsp;&nbsp;&nbsp;</span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='amount'>
               </mat-form-field>
             </div>
             <div class='item item-2' fxFlex='100%'>
@@ -168,13 +168,13 @@
                 acknowledge under Real Estate Tax Receipt No. CTO.&nbsp;&nbsp;&nbsp;
               </span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='CTONo'>
               </mat-form-field>
               <span>
                 &nbsp;&nbsp;&nbsp;dated&nbsp;&nbsp;&nbsp;
               </span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='dated'>
               </mat-form-field>
             </div>
             <div class='item item-3' fxFlex='100%'>
@@ -182,13 +182,13 @@
                 This certification has been issued upon the request of&nbsp;&nbsp;&nbsp;
               </span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='requestor'>
               </mat-form-field>
               <span>
                 &nbsp;&nbsp;&nbsp;for the purpose of:&nbsp;&nbsp;&nbsp;
               </span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='purpose'>
               </mat-form-field>
             </div>
             <br>
@@ -197,15 +197,11 @@
                 Verified by:&nbsp;&nbsp;&nbsp;
               </span>
               <mat-form-field>
-                <input matInput type='text'>
-              </mat-form-field>
-              <span>&nbsp;&nbsp;&nbsp;</span>
-              <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='encoder1'>
               </mat-form-field>
               <span>&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;</span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='date'>
               </mat-form-field>
             </div>
             <div class='item item-5' fxFlex='100%'>
@@ -213,23 +209,23 @@
                 Certification Fee:&nbsp;&nbsp;&nbsp;
               </span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='certfee'>
               </mat-form-field>
               <span>&nbsp;&nbsp;&nbsp;Amount:&nbsp;&nbsp;&nbsp;</span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='amt'>
               </mat-form-field>
             </div>
             <div class='item item-6' fxFlex='100%'>
               <span>O.R. No.:&nbsp;&nbsp;&nbsp;</span>
               <mat-form-field>
-                <input matInput type='text'>
+                <input matInput type='text' [(ngModel)]='orNo'>
               </mat-form-field>
             </div>
             <mat-form-field class='item item-7' fxFlex='100%'>
-              <textarea matInput placeholder='Remarks'></textarea>
+              <textarea matInput placeholder='Remarks' [(ngModel)]='remarks'></textarea>
             </mat-form-field>
-            <button mat-raised-button color='primary' type='button'>Generate Clearance</button>
+            <button mat-raised-button color='primary' type='button' (click)='genCl()'>Generate Clearance</button>
           </div>
         </form>
       </mat-card-content>
