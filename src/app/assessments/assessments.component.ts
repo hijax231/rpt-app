@@ -29,6 +29,12 @@ export class AssessmentsComponent implements OnInit {
     this.router.navigate([route])
   }
 
+  machAssessment() {
+    let token = jwt_decode(localStorage.getItem('auth'))
+    let route = '/user/' + token.username + '/assessments/machinery'
+    this.router.navigate([route])
+  }
+
 }
 
 export default AssessmentsComponent

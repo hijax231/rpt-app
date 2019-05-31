@@ -12,6 +12,10 @@ import { LandReassessmentComponent } from './land-reassessment/land-reassessment
 import { BuildingReassessmentComponent } from './building-reassessment/building-reassessment.component';
 import { FaasRecComponent } from './faas-rec/faas-rec.component';
 import { LandTaxComponent } from './land-tax/land-tax.component';
+import { ClearanceComponent } from './clearance/clearance.component';
+import { RPTOPComponent } from './rptop/rptop.component';
+import { MachAssessmentComponent } from './mach-assessment/mach-assessment.component';
+import { MachReassessmentComponent } from './mach-reassessment/mach-reassessment.component';
 
 
 const routes: Routes = [
@@ -22,11 +26,15 @@ const routes: Routes = [
   { path: 'user/:username/assessments', component: AssessmentsComponent },
   { path: 'user/:username/assessments/land', component: LandAssessmentComponent },
   { path: 'user/:username/assessments/building', component: BuildingAssessmentComponent },
+  { path: 'user/:username/assessments/machinery', component: MachAssessmentComponent },
   { path: 'user/:username/reassessments', component: ReassessmentsComponent },
   { path: 'user/:username/reassessments/land', component: LandReassessmentComponent },
   { path: 'user/:username/reassessments/building', component: BuildingReassessmentComponent },
+  { path: 'user/:username/reassessments/machinery', component: MachReassessmentComponent },
   { path: 'user/:username/faas-records', component: FaasRecComponent },
   { path: 'user/:username/land-tax', component: LandTaxComponent },
+  { path: 'user/:username/land-tax/clearance', component: ClearanceComponent },
+  { path: 'user/:username/land-tax/rptop', component: RPTOPComponent }
 ];
 
 @NgModule({
@@ -46,5 +54,9 @@ export const routingComponents = [
   LandReassessmentComponent,
   BuildingReassessmentComponent,
   FaasRecComponent,
-  LandTaxComponent
+  LandTaxComponent,
+  ClearanceComponent,
+  RPTOPComponent,
+  MachAssessmentComponent,
+  MachReassessmentComponent
 ]

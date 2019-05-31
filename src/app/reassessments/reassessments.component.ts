@@ -29,6 +29,12 @@ export class ReassessmentsComponent implements OnInit {
     this.router.navigate([route])
   }
 
+  machReassessment() {
+    let token = jwt_decode(localStorage.getItem('auth'))
+    let route = '/user/' + token.username + '/reassessments/machinery'
+    this.router.navigate([route])
+  }
+
 }
 
 export default ReassessmentsComponent;
