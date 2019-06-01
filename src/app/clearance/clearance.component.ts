@@ -8,6 +8,8 @@ import { genLandTaxCl } from '../services/genLandTaxCl';
 import { MatTableDataSource } from '@angular/material';
 import { lTaxClearance } from '../classes/lTaxClearance';
 import * as _ from 'lodash';
+import * as jwt_decode from 'jwt-decode';
+import * as moment from 'moment';
 
 var ltTableLs: landTaxTable[] = []
 var ltTableInfOwner: landTaxInfOwn[] = []
@@ -37,6 +39,7 @@ export class ClearanceComponent implements OnInit {
   amt: string;
   orNo: string;
   remarks: string;
+  posHolders: any;
 
 
   lTaxHeader: string[] = [
@@ -56,6 +59,10 @@ export class ClearanceComponent implements OnInit {
   constructor(private srchRec: searchRec, private genFile: genLandTaxCl) { }
 
   ngOnInit() {
+    this.encoder1 = this.getEncoder();
+    this.genFile.getPosHoldersCl().subscribe(res => {
+      this.posHolders = res;  
+    })
   }
 
   param1: string;
@@ -145,30 +152,85 @@ export class ClearanceComponent implements OnInit {
 
   genCl() {
     let data: lTaxClearance = {
-      current_date: '',
-      owner_names: '',
-      pin: '',
-      arp_no: '',
-      location: '',
-      assessed_value: '',
+      current_date: this.getCurDate(),
+      owner_names: this.getOwners(),
+      pin: ltTableLs[0].pin,
+      arp_no: ltTableLs[0].arpNo,
+      location: ltTableLs[0].brgy + ', ' + ltTableLs[0].city + ', ' + ltTableLs[0].province,
+      assessed_value: ltTableLs[0].assessedVal,
       payment_reason: this.input1,
       total_amount: this.amount,
       cto_no: this.CTONo,
       name_of_requestor: this.requestor,
-      purpose: '',
-      verified_by: '',
-      by_name1: '',
-      by_title1: '',
+      s1: '',
+      s2: '',
+      s3: '',
+      s4: '',
+      s5: '',
+      verified_by: this.encoder1,
+      by_name1: this.posHolders[0].holder_name,
+      by_title1: this.posHolders[0].position_name,
       certification_fee: this.certfee,
       or_no: this.orNo,
       date: this.date,
       amount: this.amt,
-      by_name2: '',
-      by_title2: '',
+      by_name2: this.posHolders[1].holder_name,
+      by_title2: this.posHolders[1].position_name,
       remarks: this.remarks
     };
-
+    switch(this.purpose) {
+      case 's1':
+        data.s1 = 'x';
+        data.s2 = ' ';
+        data.s3 = ' ';
+        data.s4 = ' ';
+        data.s5 = ' ';
+        break;
+      case 's2':
+        data.s1 = ' ';
+        data.s2 = 'x';
+        data.s3 = ' ';
+        data.s4 = ' ';
+        data.s5 = ' ';
+        break;
+      case 's3':
+        data.s1 = ' ';
+        data.s2 = ' ';
+        data.s3 = 'x';
+        data.s4 = ' ';
+        data.s5 = ' ';
+        break;
+      case 's4':
+        data.s1 = ' ';
+        data.s2 = ' ';
+        data.s3 = ' ';
+        data.s4 = 'x';
+        data.s5 = ' ';
+        break;
+      case 's5':
+        data.s1 = ' ';
+        data.s2 = ' ';
+        data.s3 = ' ';
+        data.s4 = ' ';
+        data.s5 = 'x';
+        break;
+    }
     this.genFile.lTaxCl(data);
+  }
+
+  getEncoder(): string {
+    let token = localStorage.getItem('auth');
+    let obj = jwt_decode(token)
+    return obj.name;
+  }
+
+  getCurDate(): string {
+    let date = moment(new Date()).format('MM/DD/YYYY');
+    return date.toString();
+  }
+
+  getOwners(): string {
+    return (ltTableInfOwner.length > 1) ? ltTableInfOwner[0].ownName + ' ET AL' : ltTableInfOwner[0].ownName ;
   }
 
 }
