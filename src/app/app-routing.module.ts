@@ -16,6 +16,7 @@ import { ClearanceComponent } from './clearance/clearance.component';
 import { RPTOPComponent } from './rptop/rptop.component';
 import { MachAssessmentComponent } from './mach-assessment/mach-assessment.component';
 import { MachReassessmentComponent } from './mach-reassessment/mach-reassessment.component';
+import { PrintingComponent } from './printing/printing.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'user/:username/faas-records', component: FaasRecComponent },
   { path: 'user/:username/land-tax', component: LandTaxComponent },
   { path: 'user/:username/land-tax/clearance', component: ClearanceComponent },
-  { path: 'user/:username/land-tax/rptop', component: RPTOPComponent }
+  { path: 'user/:username/land-tax/rptop', component: RPTOPComponent },
+  { path: 'user/:username/print/:file', component: PrintingComponent }
 ];
 
 @NgModule({
@@ -58,5 +60,6 @@ export const routingComponents = [
   ClearanceComponent,
   RPTOPComponent,
   MachAssessmentComponent,
-  MachReassessmentComponent
+  MachReassessmentComponent,
+  PrintingComponent
 ]

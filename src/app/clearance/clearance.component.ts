@@ -4,6 +4,7 @@ import { searchRec } from '../services/searchFaasRec.service';
 import { landTaxTable } from '../interfaces/landTaxTable';
 import { landTaxInfOwn } from '../interfaces/landTaxInfOwn';
 import { landTaxInfAdm } from '../interfaces/landTaxInfAdm';
+import { getPosHolders } from '../services/getPosHolders'
 import { genLandTaxCl } from '../services/genLandTaxCl';
 import { MatTableDataSource } from '@angular/material';
 import { lTaxClearance } from '../classes/lTaxClearance';
@@ -56,11 +57,13 @@ export class ClearanceComponent implements OnInit {
     'admName', 'admAddress', 'admContact', 'admTIN'
   ];
 
-  constructor(private srchRec: searchRec, private genFile: genLandTaxCl) { }
+  constructor(private srchRec: searchRec,
+    private genFile: genLandTaxCl,
+    private gPos: getPosHolders) { }
 
   ngOnInit() {
     this.encoder1 = this.getEncoder();
-    this.genFile.getPosHoldersCl().subscribe(res => {
+    this.gPos.getPosHoldersCl().subscribe(res => {
       this.posHolders = res;  
     })
   }
@@ -215,7 +218,7 @@ export class ClearanceComponent implements OnInit {
         data.s5 = 'x';
         break;
     }
-    this.genFile.lTaxCl(data);
+    this.genFile.lTaxCl(data)
   }
 
   getEncoder(): string {
@@ -225,7 +228,7 @@ export class ClearanceComponent implements OnInit {
   }
 
   getCurDate(): string {
-    let date = moment(new Date()).format('MM/DD/YYYY');
+    let date = moment(new Date()).format('MM-DD-YYYY');
     return date.toString();
   }
 

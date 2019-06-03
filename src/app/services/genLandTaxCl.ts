@@ -5,6 +5,7 @@ import * as JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class genLandTaxCl {
 
   URL: string = '../assets/temp/clearance_template.docx';
+  outFile: any;
 
   constructor(private http: HttpClient) { }
 
@@ -19,15 +21,7 @@ export class genLandTaxCl {
     JSZipUtils.getBinaryContent(url, callback);
   }
 
-  getPosHoldersCl(): Observable<any>{
-    let headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('auth')
-    });
-    let opt = { headers: headers }
-    return this.http.get('http://192.168.100.24:5000/api/land-tax/position-holders', opt);
-  }
-
-  lTaxCl(data: any): void {
+  lTaxCl(data: any) {
     this.loadFile(this.URL, (err: any, cont: any) => {
       if(err) { throw err; }
       const zip = new JSZip(cont);
@@ -39,12 +33,20 @@ export class genLandTaxCl {
         console.log(JSON.stringify({ error: e }))
         throw e;
       }
-      const out = doc.getZip().generate({
+      let out = doc.getZip().generate({
         type: 'blob',
         mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       })
       let fileName = 'LTC_' + data.pin + '_' + data.current_date +'.docx';
       saveAs(out, fileName);
-    })
+      let link = '/user/' + this.getUser() + '/print/' + JSON.stringify(out);
+      window.open(link, '_blank');
+    });
+  }
+
+  getUser() {
+    let token = localStorage.getItem('auth');
+    let obj = jwt_decode(token)
+    return obj.username;
   }
 }

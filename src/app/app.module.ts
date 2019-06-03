@@ -26,6 +26,7 @@ import { RPTOPComponent } from './rptop/rptop.component';
 import { ClearanceComponent } from './clearance/clearance.component';
 import { MachAssessmentComponent } from './mach-assessment/mach-assessment.component';
 import { MachReassessmentComponent } from './mach-reassessment/mach-reassessment.component';
+import { PrintingComponent } from './printing/printing.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { MachReassessmentComponent } from './mach-reassessment/mach-reassessment
     ClearanceComponent,
     MachAssessmentComponent,
     MachReassessmentComponent,
+    PrintingComponent,
   ],
   imports: [
     BrowserModule,
