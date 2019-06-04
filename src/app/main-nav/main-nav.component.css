@@ -28,3 +28,12 @@
 .mat-sidenav-content {
   margin-bottom: 70px;
 }
+
+.mat-menu {
+  width:500px;
+}
+
+.fsze {
+  font-size: 13px;
+  text-align: right;
+}

@@ -1,22 +1,39 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="false" (click)="drawer.toggle()"
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [opened]="false">
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" (click)='show = !show; drawer.toggle()'>
       <!-- <img src='../assets/SPCLOGO.png'>
       <span *ngIf='nonAuth()'>Menu</span>
       <span *ngIf='loggedIn()'>{{ userFullName }}</span>-->
       <span>Menu</span>
     </mat-toolbar>
-    <mat-nav-list *ngIf='nonAuth()'>
+    <mat-nav-list *ngIf='nonAuth()' (click)="drawer.toggle()">
       <a mat-list-item routerLink="/login">Login</a>
       <a mat-list-item routerLink="/register">Register</a>
     </mat-nav-list>
     <mat-nav-list *ngIf='loggedIn()'>
-      <div *ngFor='let nav of navs'>
+      <div *ngFor='let nav of navs' (click)="show = !show; drawer.toggle()">
         <a mat-list-item routerLink="{{nav.route}}">{{nav.text}}</a>
       </div>
+      <a mat-list-item (click)="show = !show" ng-model="show">
+        Land Tax
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-icon *ngIf="!show">expand_more</mat-icon>
+        <mat-icon *ngIf="show">expand_less</mat-icon>
+      </a>
+      <div *ngIf="show">
+        <a mat-list-item (click)='show = !show; drawer.toggle(); gotoClearance();' class='fsze'>
+          <mat-icon>arrow_right</mat-icon>&nbsp;Clearance
+        </a>
+        <a mat-list-item class='fsze' (click)="show = !show; drawer.toggle()">
+          <mat-icon>arrow_right</mat-icon>&nbsp;RPTOP
+        </a>
+      </div>
+
       <hr width='90%'>
-      <a mat-list-item (click)="logOut()">Logout</a>
+      <div (click)="drawer.toggle()">
+        <a mat-list-item (click)="logOut()">Logout</a>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
