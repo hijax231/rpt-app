@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router'
-import * as jwt_decode from 'jwt-decode'
+import { Router } from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
 
 export interface Nav {
   route: string;
@@ -29,7 +29,7 @@ export class MainNavComponent {
     { route: '/user/' + this.getUser() + '/assessments', text: 'Assessments' },
     { route: '/user/' + this.getUser() + '/reassessments', text: 'Reassessments' },
     { route: '/user/' + this.getUser() + '/faas-records', text: 'Faas Records' },
-    { route: '/user/' + this.getUser() + '/land-tax', text: 'Land Tax'},
+    //{ route: '/user/' + this.getUser() + '/land-tax', text: 'Land Tax'},
   ]
 
   getUser() {
@@ -38,6 +38,12 @@ export class MainNavComponent {
       this.userFullName = token.name
       return token.username
     }
+  }
+
+  gotoClearance() {
+    let token = jwt_decode(localStorage.getItem('auth'))
+    let route = '/user/' + this.getUser() + '/land-tax/clearance'
+    this.route.navigate([route])
   }
 
   nonAuth() {
