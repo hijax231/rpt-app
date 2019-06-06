@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { selectOpt } from '../interfaces/selectOpt';
 import { searchRec } from '../services/searchFaasRec.service';
 import { landTaxTable } from '../interfaces/landTaxTable';
@@ -11,6 +11,7 @@ import { lTaxClearance } from '../classes/lTaxClearance';
 import * as _ from 'lodash';
 import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 var ltTableLs: landTaxTable[] = []
 var ltTableInfOwner: landTaxInfOwn[] = []
@@ -58,8 +59,8 @@ export class ClearanceComponent implements OnInit {
   ];
 
   constructor(private srchRec: searchRec,
-    private genFile: genLandTaxCl,
-    private gPos: getPosHolders) { }
+    private gPos: getPosHolders,
+    public matDialog: MatDialog) { }
 
   ngOnInit() {
     this.encoder1 = this.getEncoder();
@@ -218,7 +219,8 @@ export class ClearanceComponent implements OnInit {
         data.s5 = 'x';
         break;
     }
-    this.genFile.lTaxCl(data)
+    //this.genFile.lTaxCl(data)
+    this.matDialog.open(DialogClearance, { width: '80%', data: data })
   }
 
   getEncoder(): string {
@@ -236,4 +238,25 @@ export class ClearanceComponent implements OnInit {
     return (ltTableInfOwner.length > 1) ? ltTableInfOwner[0].ownName + ' ET AL' : ltTableInfOwner[0].ownName ;
   }
 
+}
+
+@Component({
+  selector: 'app-dialog-clearance',
+  templateUrl: 'dialog-clearance.html'
+})
+
+export class DialogClearance implements OnInit{
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogClearance>,
+    @Inject(MAT_DIALOG_DATA) public genData: lTaxClearance,
+    private genFile: genLandTaxCl
+  ) {}
+
+  ngOnInit() {
+    // console.log(this.data);
+    this.genFile.lTaxCl(this.genData).subscribe(res => {
+      console.log(res);
+    })
+  }
 }

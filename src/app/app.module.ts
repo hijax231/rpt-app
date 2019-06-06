@@ -23,7 +23,7 @@ import { BuildingReassessmentComponent } from './building-reassessment/building-
 import { FaasRecComponent } from './faas-rec/faas-rec.component';
 import { LandTaxComponent } from './land-tax/land-tax.component';
 import { RPTOPComponent } from './rptop/rptop.component';
-import { ClearanceComponent } from './clearance/clearance.component';
+import { ClearanceComponent, DialogClearance } from './clearance/clearance.component';
 import { MachAssessmentComponent } from './mach-assessment/mach-assessment.component';
 import { MachReassessmentComponent } from './mach-reassessment/mach-reassessment.component';
 import { PrintingComponent } from './printing/printing.component';
@@ -46,6 +46,7 @@ import { PrintingComponent } from './printing/printing.component';
     LandTaxComponent,
     RPTOPComponent,
     ClearanceComponent,
+    DialogClearance,
     MachAssessmentComponent,
     MachReassessmentComponent,
     PrintingComponent,
@@ -80,6 +81,10 @@ import { PrintingComponent } from './printing/printing.component';
   ],
   providers: [
     MatDatepickerModule,
+  ],
+  entryComponents: [
+    ClearanceComponent,
+    DialogClearance,
   ],
   bootstrap: [AppComponent]
 })
