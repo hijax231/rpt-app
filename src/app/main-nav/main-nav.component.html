@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [opened]="false">
-    <mat-toolbar color="primary" (click)='show = !show; drawer.toggle()'>
+    <mat-toolbar color="primary" (click)='drawer.toggle()'>
       <!-- <img src='../assets/SPCLOGO.png'>
       <span *ngIf='nonAuth()'>Menu</span>
       <span *ngIf='loggedIn()'>{{ userFullName }}</span>-->
@@ -12,33 +12,34 @@
       <a mat-list-item routerLink="/register">Register</a>
     </mat-nav-list>
     <mat-nav-list *ngIf='loggedIn()'>
-      <div *ngFor='let nav of navs' (click)="show = !show; drawer.toggle()">
+      <div *ngFor='let nav of navs' (click)="drawer.toggle();">
         <a mat-list-item routerLink="{{nav.route}}">{{nav.text}}</a>
       </div>
-      <a mat-list-item (click)="show = !show" ng-model="show">
+      <a mat-list-item (click)="ltLinks = !ltLinks" ng-model="show">
         Land Tax
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <mat-icon *ngIf="!show">expand_more</mat-icon>
-        <mat-icon *ngIf="show">expand_less</mat-icon>
+        <mat-icon *ngIf="!ltLinks">expand_more</mat-icon>
+        <mat-icon *ngIf="ltLinks">expand_less</mat-icon>
       </a>
-      <div *ngIf="show">
-        <a mat-list-item (click)='show = !show; drawer.toggle(); gotoClearance();' class='fsze'>
+      <!-- *ngIf="show"-->
+      <div [ngClass]="{ 'show': ltLinks, 'hide': !ltLinks }">
+        <a mat-list-item (click)='drawer.toggle(); gotoClearance();' class='fsze'>
           <mat-icon>arrow_right</mat-icon>&nbsp;Clearance
         </a>
-        <a mat-list-item class='fsze' (click)="show = !show; drawer.toggle()">
+        <a mat-list-item class='fsze' (click)="drawer.toggle(); gotoRPTOP()">
           <mat-icon>arrow_right</mat-icon>&nbsp;RPTOP
         </a>
       </div>
 
       <hr width='90%'>
       <div (click)="drawer.toggle()">
-        <a mat-list-item (click)="logOut()">Logout</a>
+        <a mat-list-item (click)="logOut(); ltLinks=false">Logout</a>
       </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="ltLinks=false; drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class='spanRPT'>RPT Web Application</span>

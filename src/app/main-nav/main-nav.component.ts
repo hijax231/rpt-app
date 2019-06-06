@@ -46,6 +46,12 @@ export class MainNavComponent {
     this.route.navigate([route])
   }
 
+  gotoRPTOP() {
+    let token = jwt_decode(localStorage.getItem('auth'))
+    let route = '/user/' + token.username + '/land-tax/rptop'
+    this.route.navigate([route])
+  }
+
   nonAuth() {
     return localStorage.getItem('auth') == null
   }
