@@ -1,21 +1,39 @@
 <h2>Select Module</h2>
 <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
   <div class='item item-1' fxFlex='30%' fxLayoutAlign='center center'>
-    <div class='rBtn' mat-raised-button (click)='landReassessment()' color='primary'>
-      <img src='../assets/land.png'>
-      <div>Land Reassessment</div>
+    <div class='rBtn'>
+      <img src='../assets/land.png' (click)='landReassessment()' (mouseover)='lndTxtClr=true' (mouseleave)="lndTxtClr=false"
+      [ngClass]="{ 'imgZoomIn': lndImg, 'imgZoomOut': !lndImg }">
+        <div>
+          <span class='modName' (click)='landReassessment()' [ngClass]="{ 'blue': lndTxtClr, 'blck': !lndTxtClr }"
+          (mouseover)='lndImg=true' (mouseleave)="lndImg=false">
+            Land Reassessment
+          </span>
+        </div>
     </div>
   </div>
   <div class='item item-2' fxFlex='30%' fxLayoutAlign='center center'>
-    <div class='rBtn' mat-raised-button (click)='buildingReassessment()' color='primary'>
-      <img src='../assets/BUILDINGLOGOpng.png'>
-      <div>Building Reassessment</div>
+    <div class='rBtn'>
+      <img src='../assets/BUILDINGLOGOpng.png' (click)='buildingReassessment()' (mouseover)='bldgTxtClr=true' (mouseleave)="bldgTxtClr=false"
+      [ngClass]="{ 'imgZoomIn': bldgImg, 'imgZoomOut': !bldgImg }">
+      <div>
+        <span class='modName' (click)='buildingReassessment()' [ngClass]="{ 'blue': bldgTxtClr, 'blck': !bldgTxtClr }"
+        (mouseover)='bldgImg=true' (mouseleave)="bldgImg=false">
+          Building Reassessment
+        </span>
+      </div>
     </div>
   </div>
   <div class='item item-3' fxFlex='30%' fxLayoutAlign='center center'>
-    <div class='rBtn' mat-raised-button color='primary'>
-      <img src='../assets/Machineries logo 2.png'>
-      <div>Machinery Reassessment</div>
+    <div class='rBtn'>
+      <img src='../assets/Machineries logo 2.png' (mouseover)='machTxtClr=true' (mouseleave)="machTxtClr=false"
+      [ngClass]="{ 'imgZoomIn': machImg, 'imgZoomOut': !machImg }">
+      <div>
+        <span class='modName' [ngClass]="{ 'blue': machTxtClr, 'blck': !machTxtClr }"
+        (mouseover)='machImg=true' (mouseleave)="machImg=false">
+          Machinery Reassessment
+        </span>
+      </div>
     </div>
   </div>
   <br><br><br><br>
