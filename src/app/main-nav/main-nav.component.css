@@ -37,3 +37,9 @@
   font-size: 13px;
   text-align: right;
 }
+
+@media (max-width: 425px){
+.user{
+  display: none;
+}
+}

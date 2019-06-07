@@ -1,22 +1,22 @@
-<h2>Select Module</h2>
-<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='10px' fxLayoutGap.xs='10px'>
-  <div class='item item-1' fxFlex='30%' fxLayoutAlign='center center'>
-    <div class='aBtn' (click)='landAssessment()' >
-    <img src='../assets/land.png'>
-    <div>Land Assessment</div>
+<div class="pad">
+<h2 fxLayoutAlign='center title'>Select Module</h2>
+<div fxLayout="row" fxLayout.xs="column" class="asheight" fxLayoutAlign="space-around stretch center" (click)='landAssessment()'>
+     <div class='item item-1 ' fxFlex='30%' fxLayoutAlign='center center'>
+        <div class='aBtn'  >
+         <img src='../assets/land.png'>
+        <div class='txt' fxLayoutAlign='center'>Land Assessment</div>
     </div>
-  </div>
-  <div class='item item-2' fxFlex='30%' fxLayoutAlign='center center'>
-    <div class='aBtn' mat-raised-button (click)='buildingAssessment()' color='primary'>
-      <img src='../assets/BUILDINGLOGOpng.png'>
-      <div>Building Assessment</div>
-    </div>
-  </div>
-  <div class='item item-3' fxFlex='30%' fxLayoutAlign='center center'>
-    <div class='aBtn' mat-raised-button (click)='machAssessment()' color='primary'>
-      <img src='../assets/Machineries logo 2.png'>
-      <div>Machinery Assessment</div>
-    </div>
-  </div>
-  <br><br><br><br>
+      </div>
+      <div class='item item-2 hover15' fxFlex='30%' fxLayoutAlign='center center' (click)='buildingAssessment()'>
+        <div class='aBtn' mat-raised-button  color='primary'>
+           <img src='../assets/BUILDINGLOGOpng.png'>
+          <div  class='txt' fxLayoutAlign='center'>Building Assessment</div>
+        </div>
+      </div>
+      <div class='item item-3 hover15' fxFlex='30%' fxLayoutAlign='center center' (click)='machAssessment()'>
+        <div class='aBtn' mat-raised-button  color='primary'>
+            <img src='../assets/Machineries logo 2.png'>
+          <div  class='txt' fxLayoutAlign='center'>Machinery Assessment</div>
+        </div>
+      </div>
 </div>
