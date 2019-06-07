@@ -5,6 +5,7 @@ import * as JSZipUtils from 'jszip-utils';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
+import * as async from 'async';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,8 @@ export class genLandTaxCl {
 
   constructor(private http: HttpClient) { }
 
-  loadFile(url: any, callback: any) {
-    return JSZipUtils.getBinaryContent(url, callback);
-  }
-
-  lTaxCl(data: any): Observable<any> {
-    return this.loadFile(this.URL, (err, cont) => {
+  loadFile(data: any) {
+    JSZipUtils.getBinaryContent(this.URL, (err, cont) => {
       if (err) { throw err; }
       const zip = new JSZip(cont);
       const doc = new docxtemplater().loadZip(zip)
@@ -38,6 +35,11 @@ export class genLandTaxCl {
         mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       });
     });
+    return this.outFile
+  }
+
+  lTaxCl(data: any) {
+    return this.loadFile
   }
 
   getUser() {

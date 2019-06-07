@@ -13,6 +13,12 @@ import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+import docxtemplater from 'docxtemplater';
+import * as JSZip from 'jszip';
+import * as JSZipUtils from 'jszip-utils';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Pipe, PipeTransform } from '@angular/core';
+
 var ltTableLs: landTaxTable[] = []
 var ltTableInfOwner: landTaxInfOwn[] = []
 var ltTableInfAdmin: landTaxInfAdm[] = []
@@ -220,7 +226,24 @@ export class ClearanceComponent implements OnInit {
         break;
     }
     //this.genFile.lTaxCl(data)
-    this.matDialog.open(DialogClearance, { width: '80%', data: data })
+    // this.matDialog.open(DialogClearance, { width: '80%', data: data })
+    JSZipUtils.getBinaryContent('../assets/temp/clearance_template.docx', (err, cont) => {
+      if (err) { throw err; }
+      const zip = new JSZip(cont);
+      const doc = new docxtemplater().loadZip(zip)
+      doc.setData(data)
+      try {
+        doc.render()
+      } catch (e) {
+        console.log(JSON.stringify({ error: e }))
+        throw e;
+      }
+      let outFile = doc.getZip().generate({
+        type: 'base64',
+        mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      });
+      this.matDialog.open(DialogClearance, { width: '80%', height: '90%', data: outFile })
+    });
   }
 
   getEncoder(): string {
@@ -245,7 +268,10 @@ export class ClearanceComponent implements OnInit {
   templateUrl: 'dialog-clearance.html'
 })
 
+
 export class DialogClearance implements OnInit{
+
+  docxSrc: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogClearance>,
@@ -254,9 +280,17 @@ export class DialogClearance implements OnInit{
   ) {}
 
   ngOnInit() {
-    // console.log(this.data);
-    this.genFile.lTaxCl(this.genData).subscribe(res => {
-      console.log(res);
-    })
+    //console.log(this.genData)
+    this.docxSrc = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + this.genData
+    // this.docxSrc = 'data:document;base64,' + this.genData
+  }
+
+}
+
+@Pipe({ name: 'docxPipe' })
+export class DialogClearancePipe implements PipeTransform  {
+  constructor(private sanitizer: DomSanitizer) { }
+  transform(value: any) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(value);
   }
 }
