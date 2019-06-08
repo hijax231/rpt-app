@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { selectOpt } from '../interfaces/selectOpt';
 import { searchRec } from '../services/searchFaasRec.service';
 import { landTaxTable } from '../interfaces/landTaxTable';
@@ -11,6 +11,13 @@ import { lTaxClearance } from '../classes/lTaxClearance';
 import * as _ from 'lodash';
 import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import docxtemplater from 'docxtemplater';
+import * as JSZip from 'jszip';
+import * as JSZipUtils from 'jszip-utils';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Pipe, PipeTransform } from '@angular/core';
 
 var ltTableLs: landTaxTable[] = []
 var ltTableInfOwner: landTaxInfOwn[] = []
@@ -58,8 +65,8 @@ export class ClearanceComponent implements OnInit {
   ];
 
   constructor(private srchRec: searchRec,
-    private genFile: genLandTaxCl,
-    private gPos: getPosHolders) { }
+    private gPos: getPosHolders,
+    public matDialog: MatDialog) { }
 
   ngOnInit() {
     this.encoder1 = this.getEncoder();
@@ -218,7 +225,25 @@ export class ClearanceComponent implements OnInit {
         data.s5 = 'x';
         break;
     }
-    this.genFile.lTaxCl(data)
+    //this.genFile.lTaxCl(data)
+    // this.matDialog.open(DialogClearance, { width: '80%', data: data })
+    JSZipUtils.getBinaryContent('../assets/temp/clearance_template.docx', (err, cont) => {
+      if (err) { throw err; }
+      const zip = new JSZip(cont);
+      const doc = new docxtemplater().loadZip(zip)
+      doc.setData(data)
+      try {
+        doc.render()
+      } catch (e) {
+        console.log(JSON.stringify({ error: e }))
+        throw e;
+      }
+      let outFile = doc.getZip().generate({
+        type: 'base64',
+        mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      });
+      this.matDialog.open(DialogClearance, { width: '80%', height: '90%', data: outFile })
+    });
   }
 
   getEncoder(): string {
@@ -236,4 +261,36 @@ export class ClearanceComponent implements OnInit {
     return (ltTableInfOwner.length > 1) ? ltTableInfOwner[0].ownName + ' ET AL' : ltTableInfOwner[0].ownName ;
   }
 
+}
+
+@Component({
+  selector: 'app-dialog-clearance',
+  templateUrl: 'dialog-clearance.html'
+})
+
+
+export class DialogClearance implements OnInit{
+
+  docxSrc: any;
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogClearance>,
+    @Inject(MAT_DIALOG_DATA) public genData: lTaxClearance,
+    private genFile: genLandTaxCl
+  ) {}
+
+  ngOnInit() {
+    //console.log(this.genData)
+    this.docxSrc = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + this.genData
+    // this.docxSrc = 'data:document;base64,' + this.genData
+  }
+
+}
+
+@Pipe({ name: 'docxPipe' })
+export class DialogClearancePipe implements PipeTransform  {
+  constructor(private sanitizer: DomSanitizer) { }
+  transform(value: any) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(value);
+  }
 }

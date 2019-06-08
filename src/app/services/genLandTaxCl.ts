@@ -2,28 +2,25 @@ import { Injectable } from '@angular/core';
 import docxtemplater from 'docxtemplater';
 import * as JSZip from 'jszip';
 import * as JSZipUtils from 'jszip-utils';
-import { saveAs } from 'file-saver';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
+import * as async from 'async';
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class genLandTaxCl {
 
-  URL: string = '../assets/temp/clearance_template.docx';
-  outFile: any;
+  private URL: string = '../assets/temp/clearance_template.docx';
+  public outFile: any = null;
 
   constructor(private http: HttpClient) { }
 
-  loadFile(url: any, callback: any) {
-    JSZipUtils.getBinaryContent(url, callback);
-  }
-
-  lTaxCl(data: any) {
-    this.loadFile(this.URL, (err: any, cont: any) => {
-      if(err) { throw err; }
+  loadFile(data: any) {
+    JSZipUtils.getBinaryContent(this.URL, (err, cont) => {
+      if (err) { throw err; }
       const zip = new JSZip(cont);
       const doc = new docxtemplater().loadZip(zip)
       doc.setData(data)
@@ -33,15 +30,16 @@ export class genLandTaxCl {
         console.log(JSON.stringify({ error: e }))
         throw e;
       }
-      let out = doc.getZip().generate({
+      this.outFile = doc.getZip().generate({
         type: 'blob',
         mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-      })
-      let fileName = 'LTC_' + data.pin + '_' + data.current_date +'.docx';
-      saveAs(out, fileName);
-      let link = '/user/' + this.getUser() + '/print/' + JSON.stringify(out);
-      window.open(link, '_blank');
+      });
     });
+    return this.outFile
+  }
+
+  lTaxCl(data: any) {
+    return this.loadFile
   }
 
   getUser() {
